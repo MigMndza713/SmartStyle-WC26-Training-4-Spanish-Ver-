@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SmartStyle — Stylist Training | Score a Goal 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1D9E75;
+    --green-dark: #0F6E56;
+    --green-light: #E1F5EE;
+    --green-deep: #085041;
+    --amber: #F0A500;
+    --amber-light: #FAEEDA;
+    --blue-light: #E6F1FB;
+    --blue: #185FA5;
+    --coral-light: #FAECE7;
+    --coral: #993C1D;
+    --bg: #F8F7F4;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.08);
+    --text: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-tertiary: #9E9E9E;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── LANGUAGE SCREEN ── */
+  #lang-screen {
+    min-height: 100vh;
+    background: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #lang-screen::before {
+    content: '⚽';
+    position: absolute;
+    font-size: 320px;
+    opacity: 0.04;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .lang-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 18px;
+  }
+  .lang-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 10vw, 72px);
+    letter-spacing: 2px;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  .lang-title span { color: var(--green); }
+  .lang-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 48px;
+    max-width: 340px;
+    line-height: 1.7;
+  }
+  .lang-prompt {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 20px;
+  }
+  .lang-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .lang-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 22px 36px;
+    border-radius: var(--radius);
+    border: 2px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 160px;
+  }
+  .lang-btn:hover {
+    border-color: var(--green);
+    background: rgba(29,158,117,0.15);
+    transform: translateY(-2px);
+  }
+  .lang-btn .flag { font-size: 36px; }
+  .lang-btn .lang-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  .lang-btn .lang-native {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+
+  /* ── COURSE WRAPPER ── */
+  #course-wrapper { display: none; }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+  .topbar-brand span { color: var(--green); }
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .progress-pill {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg);
+    border-radius: 99px;
+    padding: 5px 12px;
+  }
+  .lang-switch-btn {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .lang-switch-btn:hover { border-color: var(--green); color: var(--green); }
+
+  /* PROGRESS BAR */
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    position: sticky;
+    top: 53px;
+    z-index: 99;
+  }
+  .progress-fill {
+    height: 3px;
+    background: var(--green);
+    transition: width 0.5s ease;
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* STEPS */
+  .step { display: none; animation: fadeIn 0.3s ease; }
+  .step.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* MODULE HEADER */
+  .module-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .module-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .module-intro {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .card-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+  }
+  .card-heading {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .card-body {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* HIGHLIGHT */
+  .highlight {
+    background: var(--green-light);
+    border-left: 3px solid var(--green);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--green-deep);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0 3px 3px 0;
+  }
+  .tag-green { background: var(--green-light); color: var(--green-dark); }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-amber { background: var(--amber-light); color: #854F0B; }
+
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .kpi-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--green);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .kpi-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* PRIZE GRID */
+  .prize-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .prize-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .prize-tier {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+  }
+  .prize-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .prize-detail {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* SCRIPT BOXES */
+  .script-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .script-situation {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .script-line {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* LIST ITEMS */
+  .list-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 6px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .list-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+  }
+
+  /* NAV BUTTONS */
+  .nav-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 32px;
+    align-items: center;
+  }
+  .btn {
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .btn:hover { background: var(--bg); }
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+  }
+  .btn-primary:hover { background: var(--green-dark); border-color: var(--green-dark); }
+  .step-label {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  /* QUIZ */
+  .quiz-q { margin-bottom: 24px; }
+  .q-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.5;
+  }
+  .quiz-option:hover { border-color: var(--green); background: var(--green-light); }
+  .quiz-option.selected { border-color: var(--green); background: var(--green-light); color: var(--green-deep); }
+  .quiz-option.correct { border-color: #3B6D11; background: #EAF3DE; color: #3B6D11; font-weight: 500; }
+  .quiz-option.wrong { border-color: var(--coral); background: var(--coral-light); color: var(--coral); }
+
+  .quiz-error {
+    display: none;
+    color: var(--coral);
+    font-size: 13px;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    background: var(--coral-light);
+    border-radius: var(--radius-sm);
+  }
+
+  /* SCORE */
+  .score-wrap {
+    text-align: center;
+    padding: 20px 0 40px;
+  }
+  .score-ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--green-light);
+    border: 4px solid var(--green);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .score-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    color: var(--green-dark);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .score-of {
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 500;
+  }
+  .score-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .score-message {
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 420px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+  .score-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+  /* WELCOME HERO */
+  .welcome-hero {
+    background: var(--text);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .welcome-hero::before {
+    content: '⚽';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 80px;
+    opacity: 0.07;
+  }
+  .welcome-hero .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .welcome-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .welcome-hero p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.65;
+    max-width: 400px;
+  }
+
+  /* DATE BADGE */
+  .date-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .date-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .date-badge .db-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 3px;
+  }
+  .date-badge .db-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LANGUAGE SELECTION SCREEN
+══════════════════════════════════════ -->
+<div id="lang-screen">
+  <div class="lang-eyebrow">Stylist Training · World Cup 2026</div>
+  <div class="lang-title">Score a Goal<br/>with <span>SmartStyle</span></div>
+  <div class="lang-subtitle">Select your language to begin training.<br/>Selecciona tu idioma para comenzar.</div>
+  <div class="lang-prompt">Choose your language / Elige tu idioma</div>
+  <div class="lang-buttons">
+    <button class="lang-btn" onclick="startCourse('en')">
+      <span class="flag">🇺🇸</span>
+      <span class="lang-name">English</span>
+      <span class="lang-native">Continue in English</span>
+    </button>
+    <button class="lang-btn" onclick="startCourse('es')">
+      <span class="flag">🇪🇸</span>
+      <span class="lang-name">Español</span>
+      <span class="lang-native">Continuar en Español</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     COURSE WRAPPER
+══════════════════════════════════════ -->
+<div id="course-wrapper">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand">Smart<span>Style</span></div>
+  <div class="topbar-right">
+    <div class="progress-pill" id="progress-pill">Step 1 of 8</div>
+    <button class="lang-switch-btn" onclick="switchLanguage()" id="lang-switch-btn">ES</button>
+  </div>
+</div>
+<div class="progress-track">
+  <div class="progress-fill" id="pgbar" style="width:12.5%"></div>
+</div>
+
+<div class="main">
+
+  <!-- STEP 1: WELCOME -->
+  <div class="step active" id="step-1">
+    <div class="welcome-hero">
+      <div class="eyebrow" data-en="Stylist Training · World Cup 2026" data-es="Entrenamiento para Estilistas · Copa del Mundo 2026">Stylist Training · World Cup 2026</div>
+      <h1 data-en="Score a Goal<br/>with SmartStyle" data-es="Anota un Gol<br/>con SmartStyle">Score a Goal<br/>with SmartStyle</h1>
+      <p data-en="Complete all 5 modules and pass the final quiz to finish your training for this campaign." data-es="Completa los 5 módulos y aprueba el cuestionario final para terminar tu entrenamiento para esta campaña.">Complete all 5 modules and pass the final quiz to finish your training for this campaign.</p>
+    </div>
+    <div class="date-row">
+      <div class="date-badge"><div class="db-label" data-en="Campaign start" data-es="Inicio de campaña">Campaign start</div><div class="db-value">June 8, 2026</div></div>
+      <div class="date-badge"><div class="db-label" data-en="Campaign end" data-es="Fin de campaña">Campaign end</div><div class="db-value">July 26, 2026</div></div>
+      <div class="date-badge"><div class="db-label" data-en="Winners announced" data-es="Ganadores anunciados">Winners announced</div><div class="db-value">July 29, 2026</div></div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Why this campaign" data-es="Por qué esta campaña">Why this campaign</div>
+      <div class="card-body" data-en="Several World Cup matches will be played in Miami Gardens, bringing major foot traffic through Walmart locations. This is a major opportunity to attract new clients, increase sales, and grow our contact database for long-term outreach." data-es="Varios partidos de la Copa del Mundo se jugarán en Miami Gardens, generando gran afluencia de clientes en las tiendas Walmart. Esta es una gran oportunidad para atraer nuevos clientes, aumentar las ventas y ampliar nuestra base de contactos para alcance a largo plazo.">Several World Cup matches will be played in Miami Gardens, bringing major foot traffic through Walmart locations. This is a major opportunity to attract new clients, increase sales, and grow our contact database for long-term outreach.</div>
+    </div>
+    <div class="highlight" data-en="Your participation is critical. The success of this campaign depends entirely on how well stylists communicate and execute it on the floor every day." data-es="Tu participación es fundamental. El éxito de esta campaña depende completamente de qué tan bien los estilistas la comuniquen y ejecuten en el piso cada día.">Your participation is critical. The success of this campaign depends entirely on how well stylists communicate and execute it on the floor every day.</div>
+  </div>
+
+  <!-- STEP 2: HOW IT WORKS -->
+  <div class="step" id="step-2">
+    <div class="module-eyebrow" data-en="Module 1 of 5" data-es="Módulo 1 de 5">Module 1 of 5</div>
+    <div class="module-title" data-en="How the promotion works" data-es="Cómo funciona la promoción">How the promotion works</div>
+    <div class="module-intro" data-en="Understand the full customer journey from the moment they see the QR code to entering the raffle." data-es="Comprende el recorrido completo del cliente desde el momento en que ve el código QR hasta participar en el sorteo.">Understand the full customer journey from the moment they see the QR code to entering the raffle.</div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Step 1" data-es="Paso 1">Step 1</div>
+      <div class="card-heading" data-en="Customer sees the QR code" data-es="El cliente ve el código QR">Customer sees the QR code</div>
+      <div class="card-body" data-en="Promotional posters with QR codes are displayed throughout the store. Stylists actively invite nearby Walmart customers to scan and enter." data-es="Los carteles promocionales con códigos QR se muestran en toda la tienda. Los estilistas invitan activamente a los clientes de Walmart cercanos a escanear y participar.">Promotional posters with QR codes are displayed throughout the store. Stylists actively invite nearby Walmart customers to scan and enter.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Step 2" data-es="Paso 2">Step 2</div>
+      <div class="card-heading" data-en="Customer fills out the form" data-es="El cliente llena el formulario">Customer fills out the form</div>
+      <div class="card-body" data-en="The QR code links to an online form asking for: full name, phone number, email address, and the salon location being visited." data-es="El código QR lleva a un formulario en línea que solicita: nombre completo, número de teléfono, dirección de correo electrónico y la ubicación del salón que se visita.">The QR code links to an online form asking for: full name, phone number, email address, and the salon location being visited.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Step 3" data-es="Paso 3">Step 3</div>
+      <div class="card-heading" data-en="Customer is entered and receives a discount" data-es="El cliente queda inscrito y recibe un descuento">Customer is entered and receives a discount</div>
+      <div class="card-body" data-en="Once submitted, the customer is automatically entered in the raffle and receives <strong>20% off any service</strong> during that visit." data-es="Una vez enviado, el cliente queda automáticamente inscrito en el sorteo y recibe <strong>20% de descuento en cualquier servicio</strong> durante esa visita.">Once submitted, the customer is automatically entered in the raffle and receives <strong>20% off any service</strong> during that visit.</div>
+    </div>
+    <hr class="divider"/>
+    <div class="card-eyebrow" style="margin-bottom:10px" data-en="Important rules" data-es="Reglas importantes">Important rules</div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="No purchase is necessary to enter or win" data-es="No es necesario realizar ninguna compra para participar o ganar">No purchase is necessary to enter or win</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Limit one entry per person unless authorized by management" data-es="Límite de una participación por persona, salvo autorización de la gerencia">Limit one entry per person unless authorized by management</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Duplicate or fraudulent entries may be removed at management discretion" data-es="Las participaciones duplicadas o fraudulentas pueden ser eliminadas a discreción de la gerencia">Duplicate or fraudulent entries may be removed at management discretion</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Employees may not enter unless explicitly authorized by management" data-es="Los empleados no pueden participar a menos que la gerencia lo autorice explícitamente">Employees may not enter unless explicitly authorized by management</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Winners who cannot be contacted within 7 days may forfeit their prize" data-es="Los ganadores que no puedan ser contactados dentro de los 7 días pueden perder su premio">Winners who cannot be contacted within 7 days may forfeit their prize</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="SmartStyle reserves the right to modify or terminate the promotion if necessary" data-es="SmartStyle se reserva el derecho de modificar o dar por terminada la promoción si es necesario">SmartStyle reserves the right to modify or terminate the promotion if necessary</span></div>
+  </div>
+
+  <!-- STEP 3: PRIZE STRUCTURE -->
+  <div class="step" id="step-3">
+    <div class="module-eyebrow" data-en="Module 2 of 5" data-es="Módulo 2 de 5">Module 2 of 5</div>
+    <div class="module-title" data-en="Prize structure" data-es="Estructura de premios">Prize structure</div>
+    <div class="module-intro" data-en="There are three prize tiers. Knowing who qualifies for each is one of the most important things to communicate accurately to customers." data-es="Hay tres niveles de premios. Saber quién califica para cada uno es una de las cosas más importantes que debes comunicar con precisión a los clientes.">There are three prize tiers. Knowing who qualifies for each is one of the most important things to communicate accurately to customers.</div>
+    <div class="prize-grid">
+      <div class="prize-card">
+        <div class="prize-tier" data-en="Tier 1" data-es="Nivel 1">Tier 1</div>
+        <div class="prize-name" data-en="New Walmart clients only" data-es="Solo nuevos clientes de Walmart">New Walmart clients only</div>
+        <div class="prize-detail"><span class="tag tag-green" data-en="10 winners" data-es="10 ganadores">10 winners</span><br/><span data-en="6 months of free cut + shampoo service ($25.97/month). Up to 1 cut per calendar month, 6 total. Prize expires after 6 months. Transferable." data-es="6 meses de corte + servicio de champú gratis ($25.97/mes). Hasta 1 corte por mes calendario, 6 en total. El premio vence después de 6 meses. Transferible.">6 months of free cut + shampoo service ($25.97/month). Up to 1 cut per calendar month, 6 total. Prize expires after 6 months. Transferable.</span></div>
+      </div>
+      <div class="prize-card">
+        <div class="prize-tier" data-en="Tier 2" data-es="Nivel 2">Tier 2</div>
+        <div class="prize-name" data-en="Existing clients only" data-es="Solo clientes existentes">Existing clients only</div>
+        <div class="prize-detail"><span class="tag tag-blue" data-en="3 winners" data-es="3 ganadores">3 winners</span><br/><span data-en="One free service of their choice up to $200. Valid for one service only, subject to scheduling. Non-transferable." data-es="Un servicio gratuito a su elección hasta $200. Válido para un servicio únicamente, sujeto a disponibilidad. No transferible.">One free service of their choice up to $200. Valid for one service only, subject to scheduling. Non-transferable.</span></div>
+      </div>
+      <div class="prize-card">
+        <div class="prize-tier" data-en="Tier 3 — Weekly" data-es="Nivel 3 — Semanal">Tier 3 — Weekly</div>
+        <div class="prize-name" data-en="All clients eligible" data-es="Todos los clientes son elegibles">All clients eligible</div>
+        <div class="prize-detail"><span class="tag tag-amber" data-en="10 weekly winners" data-es="10 ganadores semanales">10 weekly winners</span><br/><span data-en="Product kits and merchandise. Open to both new and existing clients. Product selection may vary. Non-transferable." data-es="Kits de productos y mercancía. Abierto tanto para clientes nuevos como existentes. La selección de productos puede variar. No transferible.">Product kits and merchandise. Open to both new and existing clients. Product selection may vary. Non-transferable.</span></div>
+      </div>
+    </div>
+    <div class="highlight" data-en="SmartStyle absorbs all prize costs — this means no change to stylist service amounts or pay for any prize service rendered." data-es="SmartStyle absorbe todos los costos de los premios, lo que significa que no hay cambios en los montos de servicio ni en el pago de los estilistas por cualquier servicio de premio prestado.">SmartStyle absorbs all prize costs — this means no change to stylist service amounts or pay for any prize service rendered.</div>
+    <div class="card-eyebrow" style="margin-bottom:10px" data-en="Rules to remember" data-es="Reglas para recordar">Rules to remember</div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Tier 1 is exclusively for new clients — existing customers do not qualify" data-es="El Nivel 1 es exclusivamente para nuevos clientes: los clientes existentes no califican">Tier 1 is exclusively for new clients — existing customers do not qualify</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Tier 2 is exclusively for existing or returning customers" data-es="El Nivel 2 es exclusivamente para clientes existentes o que regresan">Tier 2 is exclusively for existing or returning customers</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="No prizes have cash value" data-es="Ningún premio tiene valor en efectivo">No prizes have cash value</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Never promise prizes outside the official rules" data-es="Nunca prometas premios fuera de las reglas oficiales">Never promise prizes outside the official rules</span></div>
+  </div>
+
+  <!-- STEP 4: KPIs & INCENTIVES -->
+  <div class="step" id="step-4">
+    <div class="module-eyebrow" data-en="Module 3 of 5" data-es="Módulo 3 de 5">Module 3 of 5</div>
+    <div class="module-title" data-en="Your goals and incentives" data-es="Tus metas e incentivos">Your goals and incentives</div>
+    <div class="module-intro" data-en="Every stylist has a registration target. Here is what is expected and what you can earn during the campaign." data-es="Cada estilista tiene una meta de registro. Esto es lo que se espera y lo que puedes ganar durante la campaña.">Every stylist has a registration target. Here is what is expected and what you can earn during the campaign.</div>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-num">1.5</div><div class="kpi-label" data-en="Registrations per hour" data-es="Registros por hora">Registrations per hour</div></div>
+      <div class="kpi-card"><div class="kpi-num">60</div><div class="kpi-label" data-en="Registrations per week (40hrs)" data-es="Registros por semana (40hrs)">Registrations per week (40hrs)</div></div>
+      <div class="kpi-card"><div class="kpi-num">20%</div><div class="kpi-label" data-en="Discount offered to every customer" data-es="Descuento ofrecido a cada cliente">Discount offered to every customer</div></div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Store incentive" data-es="Incentivo de tienda">Store incentive</div>
+      <div class="card-heading" data-en="Scissors tool kit for every stylist" data-es="Kit de tijeras para cada estilista">Scissors tool kit for every stylist</div>
+      <div class="card-body" data-en="The store with the highest number of verified client registrations during the full campaign period wins a professional scissors tool kit for each stylist on the team." data-es="La tienda con el mayor número de registros de clientes verificados durante el período completo de la campaña gana un kit profesional de tijeras para cada estilista del equipo.">The store with the highest number of verified client registrations during the full campaign period wins a professional scissors tool kit for each stylist on the team.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Individual incentive" data-es="Incentivo individual">Individual incentive</div>
+      <div class="card-heading" data-en="$100 gift card" data-es="Tarjeta de regalo de $100">$100 gift card</div>
+      <div class="card-body" data-en="The individual stylist who converts the most registrations from non-customers into paying customers wins a $100 gift card." data-es="El estilista individual que convierta la mayor cantidad de registros de no clientes en clientes de pago gana una tarjeta de regalo de $100.">The individual stylist who converts the most registrations from non-customers into paying customers wins a $100 gift card.</div>
+    </div>
+    <hr class="divider"/>
+    <div class="card-eyebrow" style="margin-bottom:10px" data-en="Beyond registrations — your sales goals" data-es="Más allá de los registros — tus metas de ventas">Beyond registrations — your sales goals</div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Encourage every registered customer to use their 20% discount the same visit" data-es="Alienta a cada cliente registrado a usar su descuento del 20% en la misma visita">Encourage every registered customer to use their 20% discount the same visit</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Recommend additional salon services after discussing the promotion" data-es="Recomienda servicios adicionales del salón después de hablar sobre la promoción">Recommend additional salon services after discussing the promotion</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Promote retail product purchases whenever appropriate" data-es="Promueve la compra de productos al por menor cuando sea apropiado">Promote retail product purchases whenever appropriate</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="The goal is converting registrations into paying, repeat customers" data-es="El objetivo es convertir los registros en clientes de pago recurrentes">The goal is converting registrations into paying, repeat customers</span></div>
+  </div>
+
+  <!-- STEP 5: SCRIPTS -->
+  <div class="step" id="step-5">
+    <div class="module-eyebrow" data-en="Module 4 of 5" data-es="Módulo 4 de 5">Module 4 of 5</div>
+    <div class="module-title" data-en="What to say to customers" data-es="Qué decirle a los clientes">What to say to customers</div>
+    <div class="module-intro" data-en="Keep every interaction friendly, energetic, and brief. Use these scripts as your guide for every situation you will encounter on the floor." data-es="Mantén cada interacción amigable, enérgica y breve. Usa estos guiones como guía para cada situación que encuentres en el piso.">Keep every interaction friendly, energetic, and brief. Use these scripts as your guide for every situation you will encounter on the floor.</div>
+    <div class="script-box">
+      <div class="script-situation" data-en="Opening — invite any nearby customer" data-es="Apertura — invita a cualquier cliente cercano">Opening — invite any nearby customer</div>
+      <div class="script-line" data-en='"Hi! We&apos;re currently running our World Cup promotion called &apos;Score a Goal with SmartStyle.&apos; If you scan this QR code and fill out a quick form, you&apos;ll automatically be entered into our raffle for free haircuts, free services, and product kits."' data-es='"¡Hola! Actualmente tenemos una promoción de la Copa del Mundo llamada &apos;Anota un Gol con SmartStyle.&apos; Si escaneas este código QR y llenas un formulario rápido, participarás automáticamente en nuestro sorteo para cortes gratis, servicios gratuitos y kits de productos."'>"Hi! We're currently running our World Cup promotion called 'Score a Goal with SmartStyle.' If you scan this QR code and fill out a quick form, you'll automatically be entered into our raffle for free haircuts, free services, and product kits."</div>
+    </div>
+    <div class="script-box">
+      <div class="script-situation" data-en="If the customer hesitates" data-es="Si el cliente duda">If the customer hesitates</div>
+      <div class="script-line" data-en='"There&apos;s no purchase necessary to enter, and completing the form also gives you 20% off any service today."' data-es='"No es necesario hacer ninguna compra para participar, y completar el formulario también te da un 20% de descuento en cualquier servicio hoy."'>"There's no purchase necessary to enter, and completing the form also gives you 20% off any service today."</div>
+    </div>
+    <div class="script-box">
+      <div class="script-situation" data-en="If the customer asks about prizes" data-es="Si el cliente pregunta sobre los premios">If the customer asks about prizes</div>
+      <div class="script-line" data-en='"We&apos;ll be selecting multiple winners weekly and at the end of the promotion. Some prizes are specifically for new customers, some are for existing customers, and others are open to everyone."' data-es='"Seleccionaremos múltiples ganadores semanalmente y al final de la promoción. Algunos premios son específicamente para nuevos clientes, otros para clientes existentes y otros están abiertos a todos."'>"We'll be selecting multiple winners weekly and at the end of the promotion. Some prizes are specifically for new customers, some are for existing customers, and others are open to everyone."</div>
+    </div>
+    <div class="script-box">
+      <div class="script-situation" data-en="Upsell transition — after they sign up" data-es="Transición de venta adicional — después de que se registren">Upsell transition — after they sign up</div>
+      <div class="script-line" data-en='"Since you already received the 20% discount today, this would also be a great opportunity to try [recommended service or product]."' data-es='"Ya que recibiste el 20% de descuento hoy, esta también sería una excelente oportunidad para probar [servicio o producto recomendado]."'>"Since you already received the 20% discount today, this would also be a great opportunity to try [recommended service or product]."</div>
+    </div>
+    <hr class="divider"/>
+    <div class="card-eyebrow" style="margin-bottom:10px" data-en="Always remember" data-es="Recuerda siempre">Always remember</div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Explain the promotion clearly and honestly at all times" data-es="Explica la promoción de forma clara y honesta en todo momento">Explain the promotion clearly and honestly at all times</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Never promise prizes outside the official rules" data-es="Nunca prometas premios fuera de las reglas oficiales">Never promise prizes outside the official rules</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Encourage participation without pressuring customers" data-es="Fomenta la participación sin presionar a los clientes">Encourage participation without pressuring customers</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Ensure customers complete the form fully and accurately" data-es="Asegúrate de que los clientes completen el formulario de forma completa y precisa">Ensure customers complete the form fully and accurately</span></div>
+    <div class="list-item"><div class="list-dot"></div><span data-en="Maintain a positive and energetic attitude throughout the entire campaign" data-es="Mantén una actitud positiva y enérgica durante toda la campaña">Maintain a positive and energetic attitude throughout the entire campaign</span></div>
+  </div>
+
+  <!-- STEP 6: SUMMARY -->
+  <div class="step" id="step-6">
+    <div class="module-eyebrow" data-en="Module 5 of 5" data-es="Módulo 5 de 5">Module 5 of 5</div>
+    <div class="module-title" data-en="Quick reference summary" data-es="Resumen de referencia rápida">Quick reference summary</div>
+    <div class="module-intro" data-en="Review these key facts before taking the quiz. Everything here came from the previous modules." data-es="Repasa estos datos clave antes de realizar el cuestionario. Todo aquí proviene de los módulos anteriores.">Review these key facts before taking the quiz. Everything here came from the previous modules.</div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Campaign dates" data-es="Fechas de la campaña">Campaign dates</div>
+      <div class="card-body" data-en="Runs June 8 – July 26, 2026. Winners announced July 29, 2026." data-es="Del 8 de junio al 26 de julio de 2026. Ganadores anunciados el 29 de julio de 2026.">Runs June 8 – July 26, 2026. Winners announced July 29, 2026.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="The discount" data-es="El descuento">The discount</div>
+      <div class="card-body" data-en="Every customer who fills out the form receives 20% off any service during that visit. No purchase is necessary to enter the raffle." data-es="Cada cliente que llene el formulario recibe un 20% de descuento en cualquier servicio durante esa visita. No es necesario realizar ninguna compra para participar en el sorteo.">Every customer who fills out the form receives 20% off any service during that visit. No purchase is necessary to enter the raffle.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Prizes at a glance" data-es="Premios en resumen">Prizes at a glance</div>
+      <div class="card-body">
+        <span class="tag tag-green">Tier 1</span> <span data-en="10 new clients win 6 months of free cuts (new clients only)" data-es="10 nuevos clientes ganan 6 meses de cortes gratis (solo nuevos clientes)">10 new clients win 6 months of free cuts (new clients only)</span><br/>
+        <span class="tag tag-blue">Tier 2</span> <span data-en="3 existing clients win 1 free service up to $200" data-es="3 clientes existentes ganan 1 servicio gratuito de hasta $200">3 existing clients win 1 free service up to $200</span><br/>
+        <span class="tag tag-amber">Tier 3</span> <span data-en="10 weekly winners get product kits — open to all" data-es="10 ganadores semanales reciben kits de productos — abierto a todos">10 weekly winners get product kits — open to all</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Your targets" data-es="Tus metas">Your targets</div>
+      <div class="card-body" data-en="1.5 registrations per hour · 60 per week · Convert registrations into paying customers" data-es="1.5 registros por hora · 60 por semana · Convierte los registros en clientes de pago">1.5 registrations per hour · 60 per week · Convert registrations into paying customers</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow" data-en="Team rewards" data-es="Recompensas del equipo">Team rewards</div>
+      <div class="card-body" data-en="Top store wins scissors kit for all stylists. Top individual stylist wins a $100 gift card." data-es="La mejor tienda gana un kit de tijeras para todos los estilistas. El mejor estilista individual gana una tarjeta de regalo de $100.">Top store wins scissors kit for all stylists. Top individual stylist wins a $100 gift card.</div>
+    </div>
+    <div class="highlight" data-en="You are now ready for the quiz. You must answer all 8 questions correctly to complete your training." data-es="Ya estás listo para el cuestionario. Debes responder las 8 preguntas correctamente para completar tu entrenamiento.">You are now ready for the quiz. You must answer all 8 questions correctly to complete your training.</div>
+  </div>
+
+  <!-- STEP 7: QUIZ -->
+  <div class="step" id="step-7">
+    <div class="module-eyebrow" data-en="Final quiz" data-es="Cuestionario final">Final quiz</div>
+    <div class="module-title" data-en="Test your knowledge" data-es="Pon a prueba tu conocimiento">Test your knowledge</div>
+    <div class="module-intro" data-en="Select the best answer for each question. All 8 questions must be answered before submitting." data-es="Selecciona la mejor respuesta para cada pregunta. Las 8 preguntas deben responderse antes de enviar.">Select the best answer for each question. All 8 questions must be answered before submitting.</div>
+
+    <div class="quiz-q" id="q1">
+      <div class="q-text" data-en='1. When does the "Score a Goal with SmartStyle" campaign officially start?' data-es='1. ¿Cuándo comienza oficialmente la campaña "Anota un Gol con SmartStyle"?'>1. When does the "Score a Goal with SmartStyle" campaign officially start?</div>
+      <button class="quiz-option" onclick="pick(1,this,'b')" data-en="Monday, June 8, 2026" data-es="Lunes, 8 de junio de 2026">Monday, June 8, 2026</button>
+      <button class="quiz-option" onclick="pick(1,this,'w')" data-en="Monday, July 4, 2026" data-es="Lunes, 4 de julio de 2026">Monday, July 4, 2026</button>
+      <button class="quiz-option" onclick="pick(1,this,'w')" data-en="Sunday, June 1, 2026" data-es="Domingo, 1 de junio de 2026">Sunday, June 1, 2026</button>
+      <button class="quiz-option" onclick="pick(1,this,'w')" data-en="Friday, July 26, 2026" data-es="Viernes, 26 de julio de 2026">Friday, July 26, 2026</button>
+    </div>
+
+    <div class="quiz-q" id="q2">
+      <div class="q-text" data-en="2. What discount does a customer receive immediately after filling out the form?" data-es="2. ¿Qué descuento recibe un cliente inmediatamente después de llenar el formulario?">2. What discount does a customer receive immediately after filling out the form?</div>
+      <button class="quiz-option" onclick="pick(2,this,'w')" data-en="10% off their next visit" data-es="10% de descuento en su próxima visita">10% off their next visit</button>
+      <button class="quiz-option" onclick="pick(2,this,'b')" data-en="20% off any service during that visit" data-es="20% de descuento en cualquier servicio durante esa visita">20% off any service during that visit</button>
+      <button class="quiz-option" onclick="pick(2,this,'w')" data-en="A free shampoo treatment" data-es="Un tratamiento de champú gratuito">A free shampoo treatment</button>
+      <button class="quiz-option" onclick="pick(2,this,'w')" data-en="$5 off any retail product" data-es="$5 de descuento en cualquier producto al por menor">$5 off any retail product</button>
+    </div>
+
+    <div class="quiz-q" id="q3">
+      <div class="q-text" data-en="3. A first-time SmartStyle client enters the raffle. Which prize tiers are they eligible for?" data-es="3. Un cliente nuevo de SmartStyle participa en el sorteo. ¿Para qué niveles de premios es elegible?">3. A first-time SmartStyle client enters the raffle. Which prize tiers are they eligible for?</div>
+      <button class="quiz-option" onclick="pick(3,this,'w')" data-en="Tier 2 only — free service up to $200" data-es="Solo Nivel 2 — servicio gratuito hasta $200">Tier 2 only — free service up to $200</button>
+      <button class="quiz-option" onclick="pick(3,this,'b')" data-en="Tier 1 and Tier 3" data-es="Nivel 1 y Nivel 3">Tier 1 and Tier 3</button>
+      <button class="quiz-option" onclick="pick(3,this,'w')" data-en="All three tiers equally" data-es="Los tres niveles por igual">All three tiers equally</button>
+      <button class="quiz-option" onclick="pick(3,this,'w')" data-en="Tier 3 only — product kits" data-es="Solo Nivel 3 — kits de productos">Tier 3 only — product kits</button>
+    </div>
+
+    <div class="quiz-q" id="q4">
+      <div class="q-text" data-en="4. How many registrations per hour is each stylist expected to average?" data-es="4. ¿Cuántos registros por hora se espera que promedie cada estilista?">4. How many registrations per hour is each stylist expected to average?</div>
+      <button class="quiz-option" onclick="pick(4,this,'w')" data-en="1 per hour" data-es="1 por hora">1 per hour</button>
+      <button class="quiz-option" onclick="pick(4,this,'w')" data-en="2 per hour" data-es="2 por hora">2 per hour</button>
+      <button class="quiz-option" onclick="pick(4,this,'b')" data-en="1.5 per hour" data-es="1.5 por hora">1.5 per hour</button>
+      <button class="quiz-option" onclick="pick(4,this,'w')" data-en="3 per hour" data-es="3 por hora">3 per hour</button>
+    </div>
+
+    <div class="quiz-q" id="q5">
+      <div class="q-text" data-en="5. A customer says they are not interested in the promotion. What is the best response?" data-es="5. Un cliente dice que no le interesa la promoción. ¿Cuál es la mejor respuesta?">5. A customer says they are not interested in the promotion. What is the best response?</div>
+      <button class="quiz-option" onclick="pick(5,this,'w')" data-en="Tell them they must enter to receive the service discount" data-es="Diles que deben participar para recibir el descuento en el servicio">Tell them they must enter to receive the service discount</button>
+      <button class="quiz-option" onclick="pick(5,this,'w')" data-en="Promise them they will receive a prize for participating" data-es="Promételes que recibirán un premio por participar">Promise them they will receive a prize for participating</button>
+      <button class="quiz-option" onclick="pick(5,this,'b')" data-en="Remind them no purchase is necessary and the form gives them 20% off today" data-es="Recuérdales que no es necesaria ninguna compra y que el formulario les da un 20% de descuento hoy">Remind them no purchase is necessary and the form gives them 20% off today</button>
+      <button class="quiz-option" onclick="pick(5,this,'w')" data-en="Move on immediately without any additional comment" data-es="Continúa inmediatamente sin ningún comentario adicional">Move on immediately without any additional comment</button>
+    </div>
+
+    <div class="quiz-q" id="q6">
+      <div class="q-text" data-en="6. What does the store with the highest number of registrations win?" data-es="6. ¿Qué gana la tienda con el mayor número de registros?">6. What does the store with the highest number of registrations win?</div>
+      <button class="quiz-option" onclick="pick(6,this,'w')" data-en="A $100 gift card for the store manager" data-es="Una tarjeta de regalo de $100 para el gerente de la tienda">A $100 gift card for the store manager</button>
+      <button class="quiz-option" onclick="pick(6,this,'w')" data-en="A free product bundle for the store" data-es="Un paquete de productos gratis para la tienda">A free product bundle for the store</button>
+      <button class="quiz-option" onclick="pick(6,this,'b')" data-en="A scissors tool kit for each stylist on the team" data-es="Un kit de tijeras para cada estilista del equipo">A scissors tool kit for each stylist on the team</button>
+      <button class="quiz-option" onclick="pick(6,this,'w')" data-en="An extra paid day off for all staff" data-es="Un día libre adicional pagado para todo el personal">An extra paid day off for all staff</button>
+    </div>
+
+    <div class="quiz-q" id="q7">
+      <div class="q-text" data-en="7. Under what condition can an employee enter the raffle?" data-es="7. ¿Bajo qué condición puede un empleado participar en el sorteo?">7. Under what condition can an employee enter the raffle?</div>
+      <button class="quiz-option" onclick="pick(7,this,'w')" data-en="Employees can always enter freely" data-es="Los empleados siempre pueden participar libremente">Employees can always enter freely</button>
+      <button class="quiz-option" onclick="pick(7,this,'b')" data-en="Only if explicitly authorized by management" data-es="Solo si la gerencia lo autoriza explícitamente">Only if explicitly authorized by management</button>
+      <button class="quiz-option" onclick="pick(7,this,'w')" data-en="Never under any circumstances" data-es="Nunca bajo ninguna circunstancia">Never under any circumstances</button>
+      <button class="quiz-option" onclick="pick(7,this,'w')" data-en="Only for the weekly Tier 3 product prize" data-es="Solo para el premio semanal de productos del Nivel 3">Only for the weekly Tier 3 product prize</button>
+    </div>
+
+    <div class="quiz-q" id="q8">
+      <div class="q-text" data-en="8. A winner is selected but cannot be contacted after the campaign. What happens to their prize?" data-es="8. Se selecciona a un ganador pero no se le puede contactar después de la campaña. ¿Qué sucede con su premio?">8. A winner is selected but cannot be contacted after the campaign. What happens to their prize?</div>
+      <button class="quiz-option" onclick="pick(8,this,'w')" data-en="It automatically rolls over to the next winner" data-es="Pasa automáticamente al siguiente ganador">It automatically rolls over to the next winner</button>
+      <button class="quiz-option" onclick="pick(8,this,'w')" data-en="They have 30 days to respond before forfeiting" data-es="Tienen 30 días para responder antes de perder el premio">They have 30 days to respond before forfeiting</button>
+      <button class="quiz-option" onclick="pick(8,this,'b')" data-en="They may forfeit their prize after 7 days" data-es="Pueden perder su premio después de 7 días">They may forfeit their prize after 7 days</button>
+      <button class="quiz-option" onclick="pick(8,this,'w')" data-en="The stylist who registered them receives the prize" data-es="El estilista que los registró recibe el premio">The stylist who registered them receives the prize</button>
+    </div>
+
+    <div class="quiz-error" id="quiz-error" data-en="Please answer all 8 questions before submitting." data-es="Por favor responde las 8 preguntas antes de enviar.">Please answer all 8 questions before submitting.</div>
+    <div class="nav-row">
+      <button class="btn" onclick="goStep(6)" data-en="Back" data-es="Atrás">Back</button>
+      <button class="btn btn-primary" onclick="submitQuiz()" data-en="Submit quiz" data-es="Enviar cuestionario">Submit quiz</button>
+    </div>
+  </div>
+
+  <!-- STEP 8: RESULTS -->
+  <div class="step" id="step-8">
+    <div class="score-wrap">
+      <div class="score-ring">
+        <div class="score-number" id="score-num">0/8</div>
+        <div class="score-of" id="score-of-label">score</div>
+      </div>
+      <div class="score-title" id="score-title">—</div>
+      <div class="score-message" id="score-message"></div>
+      <div class="score-actions">
+        <button class="btn" onclick="retakeQuiz()" data-en="Retake quiz" data-es="Repetir cuestionario">Retake quiz</button>
+        <button class="btn btn-primary" onclick="markComplete()" data-en="Mark as complete" data-es="Marcar como completado">Mark as complete</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+</div><!-- /course-wrapper -->
+
+<script>
+  var currentLang = 'en';
+  var current = 1;
+  var answers = {};
+  var correctKeys = {1:'b',2:'b',3:'b',4:'b',5:'b',6:'b',7:'b',8:'b'};
+
+  var ui = {
+    en: {
+      stepOf: function(n) { return 'Step ' + n + ' of 8'; },
+      moduleOf: function(n) { return 'Module ' + n + ' of 5'; },
+      back: 'Back',
+      next: 'Next',
+      startTraining: 'Start training',
+      takeQuiz: 'Take the quiz',
+      switchBtn: 'ES',
+      scoreOf: 'score',
+      complete: 'Training complete!',
+      completeMsg: 'Perfect score. You are fully prepared to run this campaign. Click "Mark as complete" to notify your manager.',
+      almost: 'Almost there',
+      almostMsg: function(s) { return 'You scored ' + s + ' out of 8. Review the modules and retake the quiz to achieve a perfect score before the campaign launches.'; },
+      retry: 'Please review and retry',
+      retryMsg: function(s) { return 'You scored ' + s + ' out of 8. Go back through the training modules carefully and try the quiz again.'; },
+      markAlert: 'Training marked as complete. Well done!'
+    },
+    es: {
+      stepOf: function(n) { return 'Paso ' + n + ' de 8'; },
+      moduleOf: function(n) { return 'Módulo ' + n + ' de 5'; },
+      back: 'Atrás',
+      next: 'Siguiente',
+      startTraining: 'Comenzar entrenamiento',
+      takeQuiz: 'Hacer el cuestionario',
+      switchBtn: 'EN',
+      scoreOf: 'puntuación',
+      complete: '¡Entrenamiento completo!',
+      completeMsg: 'Puntaje perfecto. Estás completamente preparado para ejecutar esta campaña. Haz clic en "Marcar como completado" para notificar a tu gerente.',
+      almost: 'Casi lo logras',
+      almostMsg: function(s) { return 'Obtuviste ' + s + ' de 8. Revisa los módulos y repite el cuestionario para lograr un puntaje perfecto antes del lanzamiento de la campaña.'; },
+      retry: 'Por favor revisa e intenta de nuevo',
+      retryMsg: function(s) { return 'Obtuviste ' + s + ' de 8. Repasa los módulos de entrenamiento con cuidado e intenta el cuestionario nuevamente.'; },
+      markAlert: '¡Entrenamiento marcado como completado. Bien hecho!'
+    }
+  };
+
+  function startCourse(lang) {
+    currentLang = lang;
+    document.getElementById('lang-screen').style.display = 'none';
+    document.getElementById('course-wrapper').style.display = 'block';
+    document.getElementById('lang-switch-btn').textContent = ui[lang].switchBtn;
+    applyLanguage();
+    goStep(1);
+  }
+
+  function switchLanguage() {
+    currentLang = currentLang === 'en' ? 'es' : 'en';
+    document.getElementById('lang-switch-btn').textContent = ui[currentLang].switchBtn;
+    applyLanguage();
+    updateNavButtons();
+  }
+
+  function applyLanguage() {
+    var lang = currentLang;
+    document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+      var val = el.getAttribute('data-' + lang);
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = val;
+      } else {
+        el.innerHTML = val;
+      }
+    });
+    document.getElementById('progress-pill').textContent = ui[lang].stepOf(current);
+    document.getElementById('score-of-label').textContent = ui[lang].scoreOf;
+  }
+
+  function updateNavButtons() {
+    var lang = currentLang;
+    document.querySelectorAll('.nav-btn-back').forEach(function(b) { b.textContent = ui[lang].back; });
+    document.querySelectorAll('.nav-btn-next').forEach(function(b, i) {
+      var stepId = parseInt(b.getAttribute('data-step'));
+      if (stepId === 1) b.textContent = ui[lang].startTraining;
+      else if (stepId === 6) b.textContent = ui[lang].takeQuiz;
+      else b.textContent = ui[lang].next;
+    });
+    document.querySelectorAll('.nav-btn-module-label').forEach(function(lbl) {
+      var n = parseInt(lbl.getAttribute('data-module'));
+      lbl.textContent = ui[lang].moduleOf(n);
+    });
+  }
+
+  function goStep(n) {
+    document.getElementById('step-' + current).classList.remove('active');
+    current = n;
+    document.getElementById('step-' + current).classList.add('active');
+    var pct = (current / 8) * 100;
+    document.getElementById('pgbar').style.width = pct + '%';
+    document.getElementById('progress-pill').textContent = ui[currentLang].stepOf(current);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function pick(qNum, el, val) {
+    var q = document.getElementById('q' + qNum);
+    var opts = q.querySelectorAll('.quiz-option');
+    opts.forEach(function(o) { o.classList.remove('selected'); });
+    el.classList.add('selected');
+    answers[qNum] = val;
+  }
+
+  function submitQuiz() {
+    if (Object.keys(answers).length < 8) {
+      document.getElementById('quiz-error').style.display = 'block';
+      return;
+    }
+    document.getElementById('quiz-error').style.display = 'none';
+    var score = 0;
+    for (var i = 1; i <= 8; i++) {
+      var q = document.getElementById('q' + i);
+      var opts = q.querySelectorAll('.quiz-option');
+      opts.forEach(function(o) {
+        o.disabled = true;
+        if (o.classList.contains('selected')) {
+          if (answers[i] === 'b') { o.classList.remove('selected'); o.classList.add('correct'); score++; }
+          else { o.classList.remove('selected'); o.classList.add('wrong'); }
+        }
+      });
+    }
+    var lang = currentLang;
+    setTimeout(function() {
+      document.getElementById('score-num').textContent = score + '/8';
+      if (score === 8) {
+        document.getElementById('score-title').textContent = ui[lang].complete;
+        document.getElementById('score-message').textContent = ui[lang].completeMsg;
+      } else if (score >= 6) {
+        document.getElementById('score-title').textContent = ui[lang].almost;
+        document.getElementById('score-message').textContent = ui[lang].almostMsg(score);
+      } else {
+        document.getElementById('score-title').textContent = ui[lang].retry;
+        document.getElementById('score-message').textContent = ui[lang].retryMsg(score);
+      }
+      goStep(8);
+    }, 500);
+  }
+
+  function retakeQuiz() {
+    answers = {};
+    for (var i = 1; i <= 8; i++) {
+      var q = document.getElementById('q' + i);
+      var opts = q.querySelectorAll('.quiz-option');
+      opts.forEach(function(o) {
+        o.classList.remove('selected','correct','wrong');
+        o.disabled = false;
+      });
+    }
+    goStep(7);
+  }
+
+  function markComplete() {
+    alert(ui[currentLang].markAlert);
+  }
+
+  // Build nav buttons dynamically
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.step').forEach(function(s) {
+      var id = parseInt(s.id.replace('step-',''));
+      if (id === 7 || id === 8) return;
+      var nav = document.createElement('div');
+      nav.className = 'nav-row';
+      if (id > 1) {
+        var back = document.createElement('button');
+        back.className = 'btn nav-btn-back';
+        back.textContent = ui[currentLang].back;
+        back.onclick = (function(stepId) { return function() { goStep(stepId - 1); }; })(id);
+        nav.appendChild(back);
+      }
+      var next = document.createElement('button');
+      next.className = 'btn btn-primary nav-btn-next';
+      next.setAttribute('data-step', id);
+      next.textContent = id === 1 ? ui[currentLang].startTraining : id === 6 ? ui[currentLang].takeQuiz : ui[currentLang].next;
+      next.onclick = (function(stepId) { return function() { goStep(stepId + 1); }; })(id);
+      nav.appendChild(next);
+      if (id > 1 && id < 7) {
+        var lbl = document.createElement('span');
+        lbl.className = 'step-label nav-btn-module-label';
+        lbl.setAttribute('data-module', id - 1);
+        lbl.textContent = ui[currentLang].moduleOf(id - 1);
+        nav.appendChild(lbl);
+      }
+      s.appendChild(nav);
+    });
+  });
+</script>
+</body>
+</html>
