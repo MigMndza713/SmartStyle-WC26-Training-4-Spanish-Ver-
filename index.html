@@ -462,7 +462,7 @@ var currentLang = 'en';
 var current = 1;
 var answers = {};
 // correct answer index per question (0=a,1=b,2=c,3=d)
-var correctIdx = {1:0, 2:1, 3:1, 4:2, 5:2, 6:2, 7:1, 8:2};
+var correctIdx = {1:0, 2:1, 3:1, 4:2, 5:2, 6:2};
 
 var T = {
   en: {
@@ -477,14 +477,14 @@ var T = {
     submitBtn: 'Submit quiz',
     retakeBtn: 'Retake quiz',
     completeBtn: 'Mark as complete',
-    quizError: 'Please answer all 8 questions before submitting.',
+    quizError: 'Please answer all 6 questions before submitting.',
     resultPass: 'Training complete! 🎉',
-    resultPassMsg: 'Perfect score — 8/8. You are certified and fully prepared to run this campaign.',
+    resultPassMsg: 'Perfect score — 6/6. You are certified and fully prepared to run this campaign.',
     resultPassScreenshot: '📸 Please take a screenshot of this screen now. Your score serves as proof of completion and may be requested by your manager.',
     resultAlmost: 'Not certified yet',
-    resultAlmostMsg: function(s){ return 'You scored '+s+'/8. A perfect score of 8/8 is required to be certified. Please review the modules and retake the quiz.'; },
+    resultAlmostMsg: function(s){ return 'You scored '+s+'/6. A perfect score of 6/6 is required to be certified. Please review the modules and retake the quiz.'; },
     resultFail: 'Not certified yet',
-    resultFailMsg: function(s){ return 'You scored '+s+'/8. A perfect score of 8/8 is required to be certified. Go back through the training modules carefully and try again.'; },
+    resultFailMsg: function(s){ return 'You scored '+s+'/6. A perfect score of 6/6 is required to be certified. Go back through the training modules carefully and try again.'; },
     completeAlert: 'Training marked as complete. Well done!',
     // Step 1
     s1ey: 'Stylist Training · World Cup 2026',
@@ -559,7 +559,7 @@ var T = {
     s6hi:'You are now ready for the quiz. You must score 8/8 to be certified and complete your training.',
     // Step 7
     s7ey:'Final quiz', s7ti:'Test your knowledge',
-    s7in:'Select the best answer for each question. You must score 8/8 to be certified. All 8 questions must be answered before submitting.',
+    s7in:'Select the best answer for each question. You must score 6/6 to be certified. All 8 questions must be answered before submitting.',
     q1t:'1. When does the "Score a Goal with SmartStyle" campaign officially start?',
     q1a:'Monday, June 8, 2026', q1b:'Monday, July 4, 2026', q1c:'Sunday, June 1, 2026', q1d:'Friday, July 26, 2026',
     q2t:'2. What discount does a customer receive immediately after filling out the form?',
@@ -589,14 +589,14 @@ var T = {
     submitBtn: 'Enviar cuestionario',
     retakeBtn: 'Repetir cuestionario',
     completeBtn: 'Marcar como completado',
-    quizError: 'Por favor responde las 8 preguntas antes de enviar.',
+    quizError: 'Por favor responde las 6 preguntas antes de enviar.',
     resultPass: '¡Entrenamiento completo! 🎉',
-    resultPassMsg: 'Puntaje perfecto — 8/8. Estás certificado y completamente preparado para ejecutar esta campaña.',
+    resultPassMsg: 'Puntaje perfecto — 6/6. Estás certificado y completamente preparado para ejecutar esta campaña.',
     resultPassScreenshot: '📸 Por favor toma una captura de pantalla de esta pantalla ahora. Tu puntuación sirve como prueba de finalización y tu gerente puede solicitarla.',
     resultAlmost: 'Aún no estás certificado',
-    resultAlmostMsg: function(s){ return 'Obtuviste '+s+'/8. Se requiere un puntaje perfecto de 8/8 para estar certificado. Por favor revisa los módulos y repite el cuestionario.'; },
+    resultAlmostMsg: function(s){ return 'Obtuviste '+s+'/6. Se requiere un puntaje perfecto de 6/6 para estar certificado. Por favor revisa los módulos y repite el cuestionario.'; },
     resultFail: 'Aún no estás certificado',
-    resultFailMsg: function(s){ return 'Obtuviste '+s+'/8. Se requiere un puntaje perfecto de 8/8 para estar certificado. Repasa los módulos con cuidado e intenta nuevamente.'; },
+    resultFailMsg: function(s){ return 'Obtuviste '+s+'/6. Se requiere un puntaje perfecto de 6/6 para estar certificado. Repasa los módulos con cuidado e intenta nuevamente.'; },
     completeAlert: '¡Entrenamiento marcado como completado. Bien hecho!',
     // Step 1
     s1ey:'Entrenamiento para Estilistas · Copa del Mundo 2026',
@@ -668,7 +668,7 @@ var T = {
     s6pl:'Premios en resumen', s6pb:'<span class="tag tag-green">Nivel 1</span> 10 nuevos clientes ganan 6 meses de cortes gratis (solo nuevos clientes)<br/><span class="tag tag-blue">Nivel 2</span> 3 clientes existentes ganan 1 servicio gratuito de hasta $200<br/><span class="tag tag-amber">Nivel 3</span> 10 ganadores semanales reciben kits de productos — abierto a todos',
     s6tl:'Tus metas', s6tb:'1.5 registros por hora · 60 por semana · Convierte los registros en clientes de pago',
     s6rl:'Recompensas del equipo', s6rb:'La mejor tienda gana un kit de tijeras para todos los estilistas. El mejor estilista individual gana una tarjeta de regalo de $100.',
-    s6hi:'Ya estás listo para el cuestionario. Debes obtener 8/8 para estar certificado y completar tu entrenamiento.',
+    s6hi:'Ya estás listo para el cuestionario. Debes obtener 6/6 para estar certificado y completar tu entrenamiento.',
     // Step 7
     s7ey:'Cuestionario final', s7ti:'Pon a prueba tu conocimiento',
     s7in:'Selecciona la mejor respuesta para cada pregunta. Debes obtener 8/8 para certificarte. Las 8 preguntas deben responderse antes de enviar.',
@@ -684,23 +684,20 @@ var T = {
     q5a:'Diles que deben participar para recibir el descuento en el servicio', q5b:'Promételes que recibirán un premio por participar', q5c:'Recuérdales que no es necesaria ninguna compra y que el formulario les da un 20% de descuento hoy y en visitas futuras mientras dure la promoción', q5d:'Continúa inmediatamente sin ningún comentario adicional',
     q6t:'6. ¿Qué gana la tienda con el mayor número de registros?',
     q6a:'Una tarjeta de regalo de $100 para el gerente de la tienda', q6b:'Un paquete de productos gratis para la tienda', q6c:'Un kit de tijeras para cada estilista del equipo', q6d:'Un día libre adicional pagado para todo el personal',
-    q7t:'7. ¿Bajo qué condición puede un empleado participar en el sorteo?',
-    q7a:'Los empleados siempre pueden participar libremente', q7b:'Solo si la gerencia lo autoriza explícitamente', q7c:'Nunca bajo ninguna circunstancia', q7d:'Solo para el premio semanal de productos del Nivel 3',
-    q8t:'8. Se selecciona a un ganador pero no se le puede contactar después de la campaña. ¿Qué sucede con su premio?',
-    q8a:'Pasa automáticamente al siguiente ganador', q8b:'Tienen 30 días para responder antes de perder el premio', q8c:'Pueden perder su premio después de 7 días', q8d:'El estilista que los registró recibe el premio'
+    
   }
 };
 
 function setText(id, val) {
-  var el = document.getElementById(id);
-  if (el) el.innerHTML = val;
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = val;
 }
 
 function applyLanguage() {
-  var L = T[currentLang];
-  document.getElementById('progress-pill').textContent = L.pill(current);
-  document.getElementById('lang-switch-btn').textContent = L.switchLbl;
-  document.getElementById('score-of-label').textContent = L.scoreOf;
+    const L = T[currentLang];
+    document.getElementById("progress-pill").textContent = L.pill(current);
+    document.getElementById("lang-switch-btn").textContent = L.switchLbl;
+    document.getElementById("score-of-label").textContent = L.scoreOf;
   // Step 1
   setText('s1-eyebrow', L.s1ey); setText('s1-title', L.s1ti); setText('s1-body', L.s1bo);
   setText('s1-start-lbl', L.s1startLbl); setText('s1-end-lbl', L.s1endLbl); setText('s1-winners-lbl', L.s1winLbl);
@@ -767,99 +764,105 @@ function applyLanguage() {
 }
 
 function startCourse(lang) {
-  currentLang = lang;
-  document.getElementById('lang-screen').style.display = 'none';
-  document.getElementById('course-wrapper').style.display = 'block';
-  applyLanguage();
-  goStep(1);
+    currentLang = lang;
+    document.getElementById("lang-screen").style.display = "none";
+    document.getElementById("course-wrapper").style.display = "block";
+    applyLanguage();
+    goStep(1);
 }
 
 function switchLanguage() {
-  currentLang = currentLang === 'en' ? 'es' : 'en';
-  applyLanguage();
+    currentLang = currentLang === "en" ? "es" : "en";
+    applyLanguage();
 }
 
 function goStep(n) {
-  if (n < 1 || n > 8) return;
-  document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
-  document.getElementById('step-' + n).classList.add('active');
-  current = n;
-  document.getElementById('progress-pill').textContent = T[currentLang].pill(n);
-  document.getElementById('pgbar').style.width = (n / 8 * 100) + '%';
-  window.scrollTo(0, 0);
+    if (n < 1 || n > 8) return;
+    document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+    document.getElementById("step-" + n).classList.add("active");
+    current = n;
+    document.getElementById("progress-pill").textContent = T[currentLang].pill(n);
+    document.getElementById("pgbar").style.width = (n / 8 * 100) + "%";
+    window.scrollTo(0, 0);
 }
 
 function pick(qNum, btn, val) {
-  answers[qNum] = val;
-  btn.parentElement.querySelectorAll('.quiz-option').forEach(function(b){ b.classList.remove('selected'); });
-  btn.classList.add('selected');
+    answers[qNum] = val;
+    btn.parentElement.querySelectorAll(".quiz-option").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
 }
 
 function submitQuiz() {
-  var L = T[currentLang];
-  for (var i = 1; i <= 8; i++) {
-    if (!answers[i]) {
-      document.getElementById('quiz-error').style.display = 'block';
-      return;
-    }
-  }
-  document.getElementById('quiz-error').style.display = 'none';
-  var score = 0;
-  var keys = ['a','b','c','d'];
-  for (var i = 1; i <= 8; i++) {
-    var correctKey = keys[correctIdx[i]];
-    var qEl = document.getElementById('q' + i);
-    qEl.querySelectorAll('.quiz-option').forEach(function(btn) {
-      btn.disabled = true;
-      if (btn.classList.contains('selected')) {
-        if (answers[i] === correctKey) {
-          btn.classList.remove('selected');
-          btn.classList.add('correct');
-        } else {
-          btn.classList.remove('selected');
-          btn.classList.add('wrong');
+    const L = T[currentLang];
+
+    // Require all 6 questions
+    for (let i = 1; i <= 6; i++) {
+        if (!answers[i]) {
+            document.getElementById("quiz-error").style.display = "block";
+            return;
         }
-      }
-    });
-    if (answers[i] === correctKey) score++;
-  }
-  setTimeout(function() {
-    document.getElementById('score-num').textContent = score + '/8';
-    var title = document.getElementById('score-title');
-    var msg = document.getElementById('score-message');
-    var screenshot = document.getElementById('score-screenshot');
-    var completeBtn = document.getElementById('btn-complete');
-    if (score === 8) {
-      title.textContent = L.resultPass; title.style.color = '#1D9E75';
-      msg.textContent = L.resultPassMsg;
-      screenshot.textContent = L.resultPassScreenshot;
-      screenshot.style.display = 'block';
-      completeBtn.style.display = 'inline-block';
-      setText('btn-complete', L.completeBtn);
-    } else {
-      title.textContent = score >= 6 ? L.resultAlmost : L.resultFail;
-      title.style.color = '#993C1D';
-      msg.textContent = score >= 6 ? L.resultAlmostMsg(score) : L.resultFailMsg(score);
-      screenshot.style.display = 'none';
-      completeBtn.style.display = 'none';
     }
-    goStep(8);
-  }, 400);
+
+    document.getElementById("quiz-error").style.display = "none";
+
+    let score = 0;
+    const keys = ["a", "b", "c", "d"];
+
+    for (let i = 1; i <= 6; i++) {
+        const correctKey = keys[correctIdx[i]];
+        const qEl = document.getElementById("q" + i);
+
+        qEl.querySelectorAll(".quiz-option").forEach(btn => {
+            btn.disabled = true;
+            if (btn.classList.contains("selected")) {
+                btn.classList.remove("selected");
+                btn.classList.add(answers[i] === correctKey ? "correct" : "wrong");
+            }
+        });
+
+        if (answers[i] === correctKey) score++;
+    }
+
+    setTimeout(() => {
+        document.getElementById("score-num").textContent = score + "/6";
+
+        const title = document.getElementById("score-title");
+        const msg = document.getElementById("score-message");
+        const screenshot = document.getElementById("score-screenshot");
+        const completeBtn = document.getElementById("btn-complete");
+
+        if (score === 6) {
+            title.textContent = L.resultPass;
+            title.style.color = "#1D9E75";
+            msg.textContent = L.resultPassMsg;
+            screenshot.textContent = L.resultPassScreenshot;
+            screenshot.style.display = "block";
+            completeBtn.style.display = "inline-block";
+        } else {
+            title.textContent = score >= 4 ? L.resultAlmost : L.resultFail;
+            title.style.color = "#993C1D";
+            msg.textContent = score >= 4 ? L.resultAlmostMsg(score) : L.resultFailMsg(score);
+            screenshot.style.display = "none";
+            completeBtn.style.display = "none";
+        }
+
+        goStep(8);
+    }, 400);
 }
 
 function retakeQuiz() {
-  answers = {};
-  document.querySelectorAll('.quiz-option').forEach(function(b){
-    b.classList.remove('selected','correct','wrong');
-    b.disabled = false;
-  });
-  document.getElementById('btn-complete').style.display = 'none';
-  document.getElementById('score-screenshot').style.display = 'none';
-  goStep(7);
+    answers = {};
+    document.querySelectorAll(".quiz-option").forEach(b => {
+        b.classList.remove("selected", "correct", "wrong");
+        b.disabled = false;
+    });
+    document.getElementById("btn-complete").style.display = "none";
+    document.getElementById("score-screenshot").style.display = "none";
+    goStep(7);
 }
 
 function markComplete() {
-  alert(T[currentLang].completeAlert);
+    alert(T[currentLang].completeAlert);
 }
 </script>
 </body>
