@@ -7,214 +7,858 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
-    --green: #1D9E75; --green-dark: #0F6E56; --green-light: #E1F5EE; --green-deep: #085041;
-    --amber: #F0A500; --amber-light: #FAEEDA; --blue-light: #E6F1FB; --blue: #185FA5;
-    --coral-light: #FAECE7; --coral: #993C1D; --bg: #F8F7F4; --surface: #FFFFFF;
-    --border: rgba(0,0,0,0.08); --text: #1A1A1A; --text-secondary: #6B6B6B;
-    --text-tertiary: #9E9E9E; --radius: 12px; --radius-sm: 8px;
+    --green: #1D9E75;
+    --green-dark: #0F6E56;
+    --green-light: #E1F5EE;
+    --green-deep: #085041;
+    --amber: #F0A500;
+    --amber-light: #FAEEDA;
+    --blue-light: #E6F1FB;
+    --blue: #185FA5;
+    --coral-light: #FAECE7;
+    --coral: #993C1D;
+    --bg: #F8F7F4;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.08);
+    --text: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-tertiary: #9E9E9E;
+    --radius: 12px;
+    --radius-sm: 8px;
   }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
 
-  /* LANGUAGE SCREEN */
-  #lang-screen {
-    min-height: 100vh; background: var(--text); display: flex; flex-direction: column;
-    align-items: center; justify-content: center; padding: 40px 24px; text-align: center;
-    position: relative; overflow: hidden;
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
   }
-  #lang-screen::before {
-    content: '⚽'; position: absolute; font-size: 320px; opacity: 0.04;
-    top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
-  }
-  .lang-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
-  .lang-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 10vw, 72px); letter-spacing: 2px; color: #fff; line-height: 1.05; margin-bottom: 16px; }
-  .lang-title span { color: var(--green); }
-  .lang-subtitle { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 48px; max-width: 340px; line-height: 1.7; }
-  .lang-prompt { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
-  .lang-buttons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-  .lang-btn {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    padding: 22px 36px; border-radius: var(--radius); border: 2px solid rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.06); cursor: pointer; transition: all 0.2s; min-width: 160px;
-  }
-  .lang-btn:hover { border-color: var(--green); background: rgba(29,158,117,0.15); transform: translateY(-2px); }
-  .lang-btn .flag { font-size: 36px; }
-  .lang-btn .lang-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: #fff; }
-  .lang-btn .lang-native { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; }
 
-  /* COURSE */
-  #course-wrapper { display: none; }
+  /* TOP BAR */
   .topbar {
-    background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 24px;
-    display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-  .topbar-brand { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); }
+  .topbar-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
   .topbar-brand span { color: var(--green); }
-  .topbar-right { display: flex; align-items: center; gap: 12px; }
-  .progress-pill { font-size: 12px; font-weight: 500; color: var(--text-secondary); background: var(--bg); border-radius: 99px; padding: 5px 12px; }
-  .lang-switch-btn {
-    font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-    color: var(--text-tertiary); background: none; border: 1px solid var(--border);
-    border-radius: 99px; padding: 5px 12px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s;
+  .topbar-right { display: flex; align-items: center; gap: 16px; }
+  .progress-pill {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg);
+    border-radius: 99px;
+    padding: 5px 12px;
   }
-  .lang-switch-btn:hover { border-color: var(--green); color: var(--green); }
-  .progress-track { height: 3px; background: var(--border); position: sticky; top: 53px; z-index: 99; }
-  .progress-fill { height: 3px; background: var(--green); transition: width 0.5s ease; }
-  .main { max-width: 640px; margin: 0 auto; padding: 40px 20px 80px; }
 
+  /* PROGRESS BAR */
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    position: sticky;
+    top: 53px;
+    z-index: 99;
+  }
+  .progress-fill {
+    height: 3px;
+    background: var(--green);
+    transition: width 0.5s ease;
+  }
+
+  /* MAIN */
+  .main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* STEPS */
   .step { display: none; animation: fadeIn 0.3s ease; }
   .step.active { display: block; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  .module-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
-  .module-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 1px; line-height: 1.1; color: var(--text); margin-bottom: 12px; }
-  .module-intro { font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; line-height: 1.7; }
+  /* MODULE HEADER */
+  .module-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .module-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .module-intro {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 12px; }
-  .card-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 5px; }
-  .card-heading { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
-  .card-body { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .card-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+  }
+  .card-heading {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .card-body {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
 
-  .highlight { background: var(--green-light); border-left: 3px solid var(--green); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 14px 18px; font-size: 14px; color: var(--green-deep); line-height: 1.65; margin-bottom: 16px; }
+  /* HIGHLIGHT */
+  .highlight {
+    background: var(--green-light);
+    border-left: 3px solid var(--green);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--green-deep);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
 
-  .tag { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 500; margin: 0 3px 3px 0; }
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0 3px 3px 0;
+  }
   .tag-green { background: var(--green-light); color: var(--green-dark); }
   .tag-blue { background: var(--blue-light); color: var(--blue); }
   .tag-amber { background: var(--amber-light); color: #854F0B; }
 
-  .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-  .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 12px; text-align: center; }
-  .kpi-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--green); letter-spacing: 1px; line-height: 1; }
-  .kpi-label { font-size: 11px; color: var(--text-tertiary); margin-top: 4px; line-height: 1.4; }
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .kpi-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--green);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .kpi-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
 
-  .prize-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 16px; }
-  .prize-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
-  .prize-tier { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 5px; }
-  .prize-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .prize-detail { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  /* PRIZE GRID */
+  .prize-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .prize-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .prize-tier {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+  }
+  .prize-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .prize-detail {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
 
-  .script-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 12px; }
-  .script-situation { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
-  .script-line { font-size: 14px; color: var(--text); line-height: 1.7; font-style: italic; }
+  /* SCRIPT BOXES */
+  .script-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .script-situation {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .script-line {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    font-style: italic;
+  }
 
-  .list-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
-  .list-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-top: 8px; flex-shrink: 0; }
-  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+  /* LIST ITEMS */
+  .list-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 6px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .list-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
 
-  .nav-row { display: flex; gap: 10px; margin-top: 32px; align-items: center; }
-  .btn { padding: 11px 22px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: all 0.15s; }
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+  }
+
+  /* NAV BUTTONS */
+  .nav-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 32px;
+    align-items: center;
+  }
+  .btn {
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    transition: all 0.15s;
+  }
   .btn:hover { background: var(--bg); }
-  .btn-primary { background: var(--green); color: #fff; border-color: var(--green); }
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+  }
   .btn-primary:hover { background: var(--green-dark); border-color: var(--green-dark); }
-  .step-label { margin-left: auto; font-size: 12px; color: var(--text-tertiary); }
+  .step-label {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
 
+  /* QUIZ */
   .quiz-q { margin-bottom: 24px; }
-  .q-text { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 12px; line-height: 1.5; }
-  .quiz-option { display: block; width: 100%; text-align: left; padding: 12px 16px; margin-bottom: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); cursor: pointer; transition: all 0.15s; line-height: 1.5; }
+  .q-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  .quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.5;
+  }
   .quiz-option:hover { border-color: var(--green); background: var(--green-light); }
   .quiz-option.selected { border-color: var(--green); background: var(--green-light); color: var(--green-deep); }
-  .quiz-option.correct { border-color: #3B6D11; background: #EAF3DE; color: #3B6D11; font-weight: 500; pointer-events: none; }
-  .quiz-option.wrong { border-color: var(--coral); background: var(--coral-light); color: var(--coral); pointer-events: none; }
-  .quiz-option.disabled { pointer-events: none; }
+  .quiz-option.correct { border-color: #3B6D11; background: #EAF3DE; color: #3B6D11; font-weight: 500; }
+  .quiz-option.wrong { border-color: var(--coral); background: var(--coral-light); color: var(--coral); }
 
-  .quiz-error { display: none; color: var(--coral); font-size: 13px; margin-bottom: 12px; padding: 10px 14px; background: var(--coral-light); border-radius: var(--radius-sm); }
+  .quiz-error {
+    display: none;
+    color: var(--coral);
+    font-size: 13px;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    background: var(--coral-light);
+    border-radius: var(--radius-sm);
+  }
 
-  .score-wrap { text-align: center; padding: 20px 0 40px; }
-  .score-ring { width: 110px; height: 110px; border-radius: 50%; background: var(--green-light); border: 4px solid var(--green); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 24px; }
-  .score-number { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--green-dark); letter-spacing: 1px; line-height: 1; }
-  .score-of { font-size: 11px; color: var(--green); font-weight: 500; }
-  .score-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; margin-bottom: 10px; }
-  .score-message { font-size: 14px; color: var(--text-secondary); max-width: 420px; margin: 0 auto 28px; line-height: 1.7; }
+  /* SCORE */
+  .score-wrap {
+    text-align: center;
+    padding: 20px 0 40px;
+  }
+  .score-ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--green-light);
+    border: 4px solid var(--green);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .score-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    color: var(--green-dark);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .score-of {
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 500;
+  }
+  .score-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .score-message {
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 420px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
   .score-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
-  .welcome-hero { background: var(--text); border-radius: var(--radius); padding: 32px 28px; margin-bottom: 20px; position: relative; overflow: hidden; }
-  .welcome-hero::before { content: '⚽'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 80px; opacity: 0.07; }
-  .welcome-hero .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
-  .welcome-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 1px; color: #fff; line-height: 1.1; margin-bottom: 12px; }
-  .welcome-hero p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; max-width: 400px; }
+  /* WELCOME HERO */
+  .welcome-hero {
+    background: var(--text);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .welcome-hero::before {
+    content: '⚽';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 80px;
+    opacity: 0.07;
+  }
+  .welcome-hero .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .welcome-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .welcome-hero p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.65;
+    max-width: 400px;
+  }
 
-  .date-row { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-  .date-badge { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 16px; flex: 1; min-width: 140px; }
-  .date-badge .db-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 3px; }
-  .date-badge .db-value { font-size: 14px; font-weight: 600; color: var(--text); }
+  /* DATE BADGE */
+  .date-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .date-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .date-badge .db-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 3px;
+  }
+  .date-badge .db-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
 </style>
 </head>
 <body>
 
-<div id="lang-screen">
-  <div class="lang-eyebrow">Stylist Training · World Cup 2026</div>
-  <div class="lang-title">Score a Goal<br/>with <span>SmartStyle</span></div>
-  <div class="lang-subtitle">Select your language to begin training.<br/>Selecciona tu idioma para comenzar.</div>
-  <div class="lang-prompt">Choose your language / Elige tu idioma</div>
-  <div class="lang-buttons">
-    <button class="lang-btn" onclick="startCourse('en')">
-      <span class="flag">🇺🇸</span>
-      <span class="lang-name">English</span>
-      <span class="lang-native">Continue in English</span>
-    </button>
-    <button class="lang-btn" onclick="startCourse('es')">
-      <span class="flag">🇪🇸</span>
-      <span class="lang-name">Español</span>
-      <span class="lang-native">Continuar en Español</span>
-    </button>
-  </div>
-</div>
-
-<div id="course-wrapper">
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-brand">Smart<span>Style</span></div>
   <div class="topbar-right">
     <div class="progress-pill" id="progress-pill">Step 1 of 8</div>
-    <button class="lang-switch-btn" onclick="switchLanguage()" id="lang-switch-btn" style="display:none">ES</button>
   </div>
 </div>
-<div class="progress-track"><div class="progress-fill" id="pgbar" style="width:12.5%"></div></div>
+<div class="progress-track">
+  <div class="progress-fill" id="pgbar" style="width:12.5%"></div>
+</div>
 
 <div class="main">
 
-<div class="step active" id="step-1">
-  <div class="welcome-hero">
-    <div class="eyebrow" id="s1-eyebrow">Stylist Training · World Cup 2026</div>
-    <h1 id="s1-title">Score a Goal<br/>with SmartStyle</h1>
-    <p id="s1-body">Complete all 5 modules and pass the final quiz to finish your training for this campaign.</p>
+  <!-- STEP 1: WELCOME -->
+  <div class="step active" id="step-1">
+    <div class="welcome-hero">
+      <div class="eyebrow">Stylist Training · World Cup 2026</div>
+      <h1>Score a Goal<br/>with SmartStyle</h1>
+      <p>Complete all 5 modules and pass the final quiz to finish your training for this campaign.</p>
+    </div>
+    <div class="date-row">
+      <div class="date-badge"><div class="db-label">Campaign start</div><div class="db-value">June 8, 2026</div></div>
+      <div class="date-badge"><div class="db-label">Campaign end</div><div class="db-value">July 26, 2026</div></div>
+      <div class="date-badge"><div class="db-label">Winners announced</div><div class="db-value">July 29, 2026</div></div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Why this campaign</div>
+      <div class="card-body">Several World Cup matches will be played in Miami Gardens, bringing major foot traffic through Walmart locations. This is a major opportunity to attract new clients, increase sales, and grow our contact database for long-term outreach.</div>
+    </div>
+    <div class="highlight">Your participation is critical. The success of this campaign depends entirely on how well stylists communicate and execute it on the floor every day.</div>
   </div>
-  <div class="date-row">
-    <div class="date-badge"><div class="db-label" id="s1-start-lbl">Campaign start</div><div class="db-value" id="s1-start-val">June 8, 2026</div></div>
-    <div class="date-badge"><div class="db-label" id="s1-end-lbl">Campaign end</div><div class="db-value" id="s1-end-val">July 26, 2026</div></div>
-    <div class="date-badge"><div class="db-label" id="s1-winners-lbl">Winners announced</div><div class="db-value" id="s1-win-val">July 29, 2026</div></div>
-  </div>
-  <div class="card">
-    <div class="card-eyebrow" id="s1-why-lbl">Why this campaign</div>
-    <div class="card-body" id="s1-why-body">Several World Cup matches will be played in Miami Gardens, bringing major foot traffic through Walmart locations. This is a major opportunity to attract new clients, increase sales, and grow our contact database for long-term outreach.</div>
-  </div>
-  <div class="highlight" id="s1-highlight">Your participation is critical. The success of this campaign depends entirely on how well stylists communicate and execute it on the floor every day.</div>
-  <div class="nav-row">
-    <button class="btn btn-primary" id="btn-1-next" onclick="goStep(2)">Start training</button>
-  </div>
-</div>
 
-<div class="step" id="step-2">
-  <div class="module-eyebrow" id="s2-eyebrow">Module 1 of 5</div>
-  <div class="module-title" id="s2-title">How the promotion works</div>
-  <div class="module-intro" id="s2-intro">Understand the full customer journey from the moment they see the QR code to entering the raffle.</div>
-  <div class="card">
-    <div class="card-eyebrow" id="s2-step1-lbl">Step 1</div>
-    <div class="card-heading" id="s2-step1-head">Customer sees the QR code</div>
-    <div class="card-body" id="s2-step1-body">Promotional posters with QR codes are displayed throughout the store. Stylists actively invite nearby Walmart customers to scan and enter.</div>
+  <!-- STEP 2: HOW IT WORKS -->
+  <div class="step" id="step-2">
+    <div class="module-eyebrow">Module 1 of 5</div>
+    <div class="module-title">How the promotion works</div>
+    <div class="module-intro">Understand the full customer journey from the moment they see the QR code to entering the raffle.</div>
+    <div class="card">
+      <div class="card-eyebrow">Step 1</div>
+      <div class="card-heading">Customer sees the QR code</div>
+      <div class="card-body">Promotional posters with QR codes are displayed throughout the store. Stylists actively invite nearby Walmart customers to scan and enter.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Step 2</div>
+      <div class="card-heading">Customer fills out the form</div>
+      <div class="card-body">The QR code links to an online form asking for: full name, phone number, email address, and the salon location being visited.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Step 3</div>
+      <div class="card-heading">Customer is entered and receives a discount</div>
+      <div class="card-body">Once submitted, the customer is automatically entered in the raffle and receives <strong>20% off any service</strong> during that visit and all future visits while the promotion lasts.</div>
+    </div>
+    <hr class="divider"/>
+    <div class="card-eyebrow" style="margin-bottom:10px">Important rules</div>
+    <div class="list-item"><div class="list-dot"></div>No purchase is necessary to enter or win</div>
+    <div class="list-item"><div class="list-dot"></div>Limit one entry per person unless authorized by management</div>
+    <div class="list-item"><div class="list-dot"></div>Duplicate or fraudulent entries may be removed at management discretion</div>
+    <div class="list-item"><div class="list-dot"></div>Employees may not enter unless explicitly authorized by management</div>
+    <div class="list-item"><div class="list-dot"></div>Winners who cannot be contacted within 7 days may forfeit their prize</div>
+    <div class="list-item"><div class="list-dot"></div>SmartStyle reserves the right to modify or terminate the promotion if necessary</div>
   </div>
-  <div class="card">
-    <div class="card-eyebrow" id="s2-step2-lbl">Step 2</div>
-    <div class="card-heading" id="s2-step2-head">Customer fills out the form</div>
-    <div class="card-body" id="s2-step2-body">The QR code links to an online form asking for: full name, phone number, email address, and the salon location being visited.</div>
+
+  <!-- STEP 3: PRIZE STRUCTURE -->
+  <div class="step" id="step-3">
+    <div class="module-eyebrow">Module 2 of 5</div>
+    <div class="module-title">Prize structure</div>
+    <div class="module-intro">There are three prize tiers. Knowing who qualifies for each is one of the most important things to communicate accurately to customers.</div>
+    <div class="prize-grid">
+      <div class="prize-card">
+        <div class="prize-tier">Tier 1</div>
+        <div class="prize-name">New Walmart clients only</div>
+        <div class="prize-detail"><span class="tag tag-green">10 winners</span><br/>6 months of free cut + shampoo service ($25.97/month). Up to 1 cut per calendar month, 6 total. Prize expires after 6 months. Transferable.</div>
+      </div>
+      <div class="prize-card">
+        <div class="prize-tier">Tier 2</div>
+        <div class="prize-name">Existing clients only</div>
+        <div class="prize-detail"><span class="tag tag-blue">3 winners</span><br/>One free service of their choice up to $200. Valid for one service only, subject to scheduling. Non-transferable.</div>
+      </div>
+      <div class="prize-card">
+        <div class="prize-tier">Tier 3 — Weekly</div>
+        <div class="prize-name">All clients eligible</div>
+        <div class="prize-detail"><span class="tag tag-amber">10 weekly winners</span><br/>Product kits and merchandise. Open to both new and existing clients. Product selection may vary. Non-transferable.</div>
+      </div>
+    </div>
+    <div class="highlight">SmartStyle absorbs all prize costs — this means no change to stylist service amounts or pay for any prize service rendered.</div>
+    <div class="card-eyebrow" style="margin-bottom:10px">Rules to remember</div>
+    <div class="list-item"><div class="list-dot"></div>Tier 1 is exclusively for new clients — existing customers do not qualify</div>
+    <div class="list-item"><div class="list-dot"></div>Tier 2 is exclusively for existing or returning customers</div>
+    <div class="list-item"><div class="list-dot"></div>No prizes have cash value</div>
+    <div class="list-item"><div class="list-dot"></div>Never promise prizes outside the official rules</div>
   </div>
-  <div class="card">
-    <div class="card-eyebrow" id="s2-step3-lbl">Step 3</div>
-    <div class="card-heading" id="s2-step3-head">Customer is entered and receives a discount</div>
-    <div class="card-body" id="s2-step3-body">Once submitted, the customer is automatically entered in the raffle and receives <strong>20% off any service</strong> during that visit and future visits as well (while the promotion lasts).</div>
+
+  <!-- STEP 4: KPIs & INCENTIVES -->
+  <div class="step" id="step-4">
+    <div class="module-eyebrow">Module 3 of 5</div>
+    <div class="module-title">Your goals and incentives</div>
+    <div class="module-intro">Every stylist has a registration target. Here is what is expected and what you can earn during the campaign.</div>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-num">1.5</div><div class="kpi-label">Registrations per hour</div></div>
+      <div class="kpi-card"><div class="kpi-num">60</div><div class="kpi-label">Registrations per week (40hrs)</div></div>
+      <div class="kpi-card"><div class="kpi-num">20%</div><div class="kpi-label">Discount offered to every customer</div></div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Store incentive</div>
+      <div class="card-heading">Scissors tool kit for every stylist</div>
+      <div class="card-body">The store with the highest number of verified client registrations during the full campaign period wins a professional scissors tool kit for each stylist on the team.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Individual incentive</div>
+      <div class="card-heading">$100 gift card</div>
+      <div class="card-body">The individual stylist who converts the most registrations from non-customers into paying customers wins a $100 gift card.</div>
+    </div>
+    <hr class="divider"/>
+    <div class="card-eyebrow" style="margin-bottom:10px">Beyond registrations — your sales goals</div>
+    <div class="list-item"><div class="list-dot"></div>Encourage every registered customer to use their 20% discount the same visit</div>
+    <div class="list-item"><div class="list-dot"></div>Recommend additional salon services after discussing the promotion</div>
+    <div class="list-item"><div class="list-dot"></div>Promote retail product purchases whenever appropriate</div>
+    <div class="list-item"><div class="list-dot"></div>The goal is converting registrations into paying, repeat customers</div>
   </div>
-  <hr class="divider"/>
-  <div class="card-eyebrow" style="margin-bottom:10px" id="s2-rules-lbl">Important rules</div>
-  <div class="list-item"><div class="list-dot"></div><span id="s2-r1">No purchase is necessary to enter or win</span></div>
-  <div class="list-item"><div class="list-dot"></div><span id="s2-r2">Limit one entry per person unless authorized by management</span></div>
-  <div class="list-item"><div class="list-dot"></div><span id="s2-r3">Duplicate or fraudulent entries may be removed at management discretion</span></div>
-  <div class="list-item"><div class="list-dot"></div><span id="s2-r4">Employees may not enter
+
+  <!-- STEP 5: SCRIPTS -->
+  <div class="step" id="step-5">
+    <div class="module-eyebrow">Module 4 of 5</div>
+    <div class="module-title">What to say to customers</div>
+    <div class="module-intro">Keep every interaction friendly, energetic, and brief. Use these scripts as your guide for every situation you will encounter on the floor.</div>
+    <div class="script-box">
+      <div class="script-situation">Opening — invite any nearby customer</div>
+      <div class="script-line">"Hi! We're currently running our World Cup promotion called 'Score a Goal with SmartStyle.' If you scan this QR code and fill out a quick form, you'll automatically be entered into our raffle for free haircuts, free services, and product kits."</div>
+    </div>
+    <div class="script-box">
+      <div class="script-situation">If the customer hesitates</div>
+      <div class="script-line">"There's no purchase necessary to enter, and completing the form also gives you 20% off any service today."</div>
+    </div>
+    <div class="script-box">
+      <div class="script-situation">If the customer asks about prizes</div>
+      <div class="script-line">"We'll be selecting multiple winners weekly and at the end of the promotion. Some prizes are specifically for new customers, some are for existing customers, and others are open to everyone."</div>
+    </div>
+    <div class="script-box">
+      <div class="script-situation">Upsell transition — after they sign up</div>
+      <div class="script-line">"Since you already received the 20% discount today, this would also be a great opportunity to try [recommended service or product]."</div>
+    </div>
+    <hr class="divider"/>
+    <div class="card-eyebrow" style="margin-bottom:10px">Always remember</div>
+    <div class="list-item"><div class="list-dot"></div>Explain the promotion clearly and honestly at all times</div>
+    <div class="list-item"><div class="list-dot"></div>Never promise prizes outside the official rules</div>
+    <div class="list-item"><div class="list-dot"></div>Encourage participation without pressuring customers</div>
+    <div class="list-item"><div class="list-dot"></div>Ensure customers complete the form fully and accurately</div>
+    <div class="list-item"><div class="list-dot"></div>Maintain a positive and energetic attitude throughout the entire campaign</div>
+  </div>
+
+  <!-- STEP 6: SUMMARY -->
+  <div class="step" id="step-6">
+    <div class="module-eyebrow">Module 5 of 5</div>
+    <div class="module-title">Quick reference summary</div>
+    <div class="module-intro">Review these key facts before taking the quiz. Everything here came from the previous modules.</div>
+    <div class="card">
+      <div class="card-eyebrow">Campaign dates</div>
+      <div class="card-body">Runs June 8 – July 26, 2026. Winners announced July 29, 2026.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">The discount</div>
+      <div class="card-body">Every customer who fills out the form receives 20% off any service during that visit and all future visits while the promotion lasts. No purchase is necessary to enter the raffle.</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Prizes at a glance</div>
+      <div class="card-body">
+        <span class="tag tag-green">Tier 1</span> 10 new clients win 6 months of free cuts (new clients only)<br/>
+        <span class="tag tag-blue">Tier 2</span> 3 existing clients win 1 free service up to $200<br/>
+        <span class="tag tag-amber">Tier 3</span> 10 weekly winners get product kits — open to all
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Your targets</div>
+      <div class="card-body">1.5 registrations per hour · 60 per week · Convert registrations into paying customers</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">Team rewards</div>
+      <div class="card-body">Top store wins scissors kit for all stylists. Top individual stylist wins a $100 gift card.</div>
+    </div>
+    <div class="highlight">You are now ready for the quiz. You must answer all 8 questions correctly to complete your training.</div>
+  </div>
+
+  <!-- STEP 7: QUIZ -->
+  <div class="step" id="step-7">
+    <div class="module-eyebrow">Final quiz</div>
+    <div class="module-title">Test your knowledge</div>
+    <div class="module-intro">Select the best answer for each question. All 8 questions must be answered before submitting.</div>
+
+    <div class="quiz-q" id="q1">
+      <div class="q-text">1. When does the "Score a Goal with SmartStyle" campaign officially start?</div>
+      <button class="quiz-option" onclick="pick(1,this,'b')">Monday, June 8, 2026</button>
+      <button class="quiz-option" onclick="pick(1,this,'w')">Monday, July 4, 2026</button>
+      <button class="quiz-option" onclick="pick(1,this,'w')">Sunday, June 1, 2026</button>
+      <button class="quiz-option" onclick="pick(1,this,'w')">Friday, July 26, 2026</button>
+    </div>
+
+    <div class="quiz-q" id="q2">
+      <div class="q-text">2. What discount does a customer receive immediately after filling out the form?</div>
+      <button class="quiz-option" onclick="pick(2,this,'w')">10% off their next visit</button>
+      <button class="quiz-option" onclick="pick(2,this,'b')">20% off any service during that visit and future visits while the promotion lasts</button>
+      <button class="quiz-option" onclick="pick(2,this,'w')">A free shampoo treatment</button>
+      <button class="quiz-option" onclick="pick(2,this,'w')">$5 off any retail product</button>
+    </div>
+
+    <div class="quiz-q" id="q3">
+      <div class="q-text">3. A first-time SmartStyle client enters the raffle. Which prize tiers are they eligible for?</div>
+      <button class="quiz-option" onclick="pick(3,this,'w')">Tier 2 only — free service up to $200</button>
+      <button class="quiz-option" onclick="pick(3,this,'b')">Tier 1 and Tier 3</button>
+      <button class="quiz-option" onclick="pick(3,this,'w')">All three tiers equally</button>
+      <button class="quiz-option" onclick="pick(3,this,'w')">Tier 3 only — product kits</button>
+    </div>
+
+    <div class="quiz-q" id="q4">
+      <div class="q-text">4. How many registrations per hour is each stylist expected to average?</div>
+      <button class="quiz-option" onclick="pick(4,this,'w')">1 per hour</button>
+      <button class="quiz-option" onclick="pick(4,this,'w')">2 per hour</button>
+      <button class="quiz-option" onclick="pick(4,this,'b')">1.5 per hour</button>
+      <button class="quiz-option" onclick="pick(4,this,'w')">3 per hour</button>
+    </div>
+
+    <div class="quiz-q" id="q5">
+      <div class="q-text">5. A customer says they are not interested in the promotion. What is the best response?</div>
+      <button class="quiz-option" onclick="pick(5,this,'w')">Tell them they must enter to receive the service discount</button>
+      <button class="quiz-option" onclick="pick(5,this,'w')">Promise them they will receive a prize for participating</button>
+      <button class="quiz-option" onclick="pick(5,this,'b')">Remind them no purchase is necessary and the form gives them 20% off today and future visits</button>
+      <button class="quiz-option" onclick="pick(5,this,'w')">Move on immediately without any additional comment</button>
+    </div>
+
+    <div class="quiz-q" id="q6">
+      <div class="q-text">6. What does the store with the highest number of registrations win?</div>
+      <button class="quiz-option" onclick="pick(6,this,'w')">A $100 gift card for the store manager</button>
+      <button class="quiz-option" onclick="pick(6,this,'w')">A free product bundle for the store</button>
+      <button class="quiz-option" onclick="pick(6,this,'b')">A scissors tool kit for each stylist on the team</button>
+      <button class="quiz-option" onclick="pick(6,this,'w')">An extra paid day off for all staff</button>
+    </div>
+
+    <div class="quiz-q" id="q7">
+      <div class="q-text">7. Under what condition can an employee enter the raffle?</div>
+      <button class="quiz-option" onclick="pick(7,this,'w')">Employees can always enter freely</button>
+      <button class="quiz-option" onclick="pick(7,this,'b')">Only if explicitly authorized by management</button>
+      <button class="quiz-option" onclick="pick(7,this,'w')">Never under any circumstances</button>
+      <button class="quiz-option" onclick="pick(7,this,'w')">Only for the weekly Tier 3 product prize</button>
+    </div>
+
+    <div class="quiz-q" id="q8">
+      <div class="q-text">8. A winner is selected but cannot be contacted after the campaign. What happens to their prize?</div>
+      <button class="quiz-option" onclick="pick(8,this,'w')">It automatically rolls over to the next winner</button>
+      <button class="quiz-option" onclick="pick(8,this,'w')">They have 30 days to respond before forfeiting</button>
+      <button class="quiz-option" onclick="pick(8,this,'b')">They may forfeit their prize after 7 days</button>
+      <button class="quiz-option" onclick="pick(8,this,'w')">The stylist who registered them receives the prize</button>
+    </div>
+
+    <div class="quiz-error" id="quiz-error">Please answer all 8 questions before submitting.</div>
+    <div class="nav-row">
+      <button class="btn" onclick="goStep(6)">Back</button>
+      <button class="btn btn-primary" onclick="submitQuiz()">Submit quiz</button>
+    </div>
+  </div>
+
+  <!-- STEP 8: RESULTS -->
+  <div class="step" id="step-8">
+    <div class="score-wrap">
+      <div class="score-ring">
+        <div class="score-number" id="score-num">0/8</div>
+        <div class="score-of">score</div>
+      </div>
+      <div class="score-title" id="score-title">—</div>
+      <div class="score-message" id="score-message"></div>
+      <div class="score-actions">
+        <button class="btn" onclick="retakeQuiz()">Retake quiz</button>
+        <button class="btn btn-primary" onclick="markComplete()">Mark as complete</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  var current = 1;
+  var answers = {};
+  var correctKeys = {1:'b',2:'b',3:'b',4:'b',5:'b',6:'b',7:'b',8:'b'};
+
+  function goStep(n) {
+    document.getElementById('step-' + current).classList.remove('active');
+    current = n;
+    document.getElementById('step-' + current).classList.add('active');
+    var pct = (current / 8) * 100;
+    document.getElementById('pgbar').style.width = pct + '%';
+    document.getElementById('progress-pill').textContent = 'Step ' + current + ' of 8';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    updateMainNav();
+  }
+
+  function updateMainNav() {}
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var nextBtns = {
+      1: document.querySelector('#step-1 .btn-primary'),
+    };
+  });
+
+  function navNext() {
+    if (current < 7) goStep(current + 1);
+  }
+  function navBack() {
+    if (current > 1) goStep(current - 1);
+  }
+
+  function pick(qNum, el, val) {
+    var q = document.getElementById('q' + qNum);
+    var opts = q.querySelectorAll('.quiz-option');
+    opts.forEach(function(o) { o.classList.remove('selected'); });
+    el.classList.add('selected');
+    answers[qNum] = val;
+  }
+
+  function submitQuiz() {
+    if (Object.keys(answers).length < 8) {
+      document.getElementById('quiz-error').style.display = 'block';
+      return;
+    }
+    document.getElementById('quiz-error').style.display = 'none';
+    var score = 0;
+    for (var i = 1; i <= 8; i++) {
+      var q = document.getElementById('q' + i);
+      var opts = q.querySelectorAll('.quiz-option');
+      opts.forEach(function(o) {
+        o.disabled = true;
+        if (o.classList.contains('selected')) {
+          if (answers[i] === 'b') { o.classList.remove('selected'); o.classList.add('correct'); score++; }
+          else { o.classList.remove('selected'); o.classList.add('wrong'); }
+        }
+      });
+    }
+    setTimeout(function() {
+      document.getElementById('score-num').textContent = score + '/8';
+      if (score === 8) {
+        document.getElementById('score-title').textContent = 'Training complete!';
+        document.getElementById('score-message').textContent = 'Perfect score. You are fully prepared to run this campaign. Click "Mark as complete" to notify your manager.';
+      } else if (score >= 6) {
+        document.getElementById('score-title').textContent = 'Almost there';
+        document.getElementById('score-message').textContent = 'You scored ' + score + ' out of 8. Review the modules and retake the quiz to achieve a perfect score before the campaign launches.';
+      } else {
+        document.getElementById('score-title').textContent = 'Please review and retry';
+        document.getElementById('score-message').textContent = 'You scored ' + score + ' out of 8. Go back through the training modules carefully and try the quiz again.';
+      }
+      goStep(8);
+    }, 500);
+  }
+
+  function retakeQuiz() {
+    answers = {};
+    for (var i = 1; i <= 8; i++) {
+      var q = document.getElementById('q' + i);
+      var opts = q.querySelectorAll('.quiz-option');
+      opts.forEach(function(o) {
+        o.classList.remove('selected','correct','wrong');
+        o.disabled = false;
+      });
+    }
+    goStep(7);
+  }
+
+  function markComplete() {
+    alert('Training marked as complete. Well done!');
+  }
+
+  document.querySelectorAll('.step').forEach(function(s) {
+    var nav = document.createElement('div');
+    nav.className = 'nav-row';
+    var id = parseInt(s.id.replace('step-',''));
+    if (id === 7 || id === 8) return;
+    if (id > 1) {
+      var back = document.createElement('button');
+      back.className = 'btn';
+      back.textContent = 'Back';
+      back.onclick = function() { goStep(id - 1); };
+      nav.appendChild(back);
+    }
+    var next = document.createElement('button');
+    next.className = 'btn btn-primary';
+    next.textContent = id === 1 ? 'Start training' : id === 6 ? 'Take the quiz' : 'Next';
+    next.onclick = function() { goStep(id + 1); };
+    nav.appendChild(next);
+    if (id > 1 && id < 7) {
+      var lbl = document.createElement('span');
+      lbl.className = 'step-label';
+      lbl.textContent = 'Module ' + (id-1) + ' of 5';
+      nav.appendChild(lbl);
+    }
+    s.appendChild(nav);
+  });
+</script>
+</body>
+</html>
