@@ -166,7 +166,7 @@
 <div class="topbar">
   <div class="topbar-brand">Smart<span>Style</span></div>
   <div class="topbar-right">
-    <div class="progress-pill" id="progress-pill">Step 1 of 8</div>
+    <div class="progress-pill" id="progress-pill">Step 1 of 6</div>
     <button class="lang-switch-btn" onclick="switchLanguage()" id="lang-switch-btn" style="display:none">ES</button>
   </div>
 </div>
@@ -359,7 +359,7 @@
     <div class="card-eyebrow" id="s6-rewards-lbl">Team rewards</div>
     <div class="card-body" id="s6-rewards-body">Top store wins scissors kit for all stylists. Top individual stylist wins a $100 gift card.</div>
   </div>
-  <div class="highlight" id="s6-highlight">You are now ready for the quiz. You must answer all 8 questions correctly to complete your training.</div>
+  <div class="highlight" id="s6-highlight">You are now ready for the quiz. You must answer all 6 questions correctly to complete your training.</div>
   <div class="nav-row">
     <button class="btn" id="btn-6-back" onclick="goStep(5)">Back</button>
     <button class="btn btn-primary" id="btn-6-next" onclick="goStep(7)">Take the quiz</button>
@@ -371,7 +371,7 @@
 <div class="step" id="step-7">
   <div class="module-eyebrow" id="s7-eyebrow">Final quiz</div>
   <div class="module-title" id="s7-title">Test your knowledge</div>
-  <div class="module-intro" id="s7-intro">Select the best answer for each question. All 8 questions must be answered before submitting.</div>
+  <div class="module-intro" id="s7-intro">Select the best answer for each question. All 6 questions must be answered before submitting.</div>
 
   <div class="quiz-q" id="q1">
     <div class="q-text" id="q1-text">1. When does the "Score a Goal with SmartStyle" campaign officially start?</div>
@@ -415,22 +415,7 @@
     <button class="quiz-option" id="q6-c" onclick="pick(6,this,'b')">A scissors tool kit for each stylist on the team</button>
     <button class="quiz-option" id="q6-d" onclick="pick(6,this,'w')">An extra paid day off for all staff</button>
   </div>
-  <div class="quiz-q" id="q7">
-    <div class="q-text" id="q7-text">7. Under what condition can an employee enter the raffle?</div>
-    <button class="quiz-option" id="q7-a" onclick="pick(7,this,'w')">Employees can always enter freely</button>
-    <button class="quiz-option" id="q7-b" onclick="pick(7,this,'b')">Only if explicitly authorized by management</button>
-    <button class="quiz-option" id="q7-c" onclick="pick(7,this,'w')">Never under any circumstances</button>
-    <button class="quiz-option" id="q7-d" onclick="pick(7,this,'w')">Only for the weekly Tier 3 product prize</button>
-  </div>
-  <div class="quiz-q" id="q8">
-    <div class="q-text" id="q8-text">8. A winner is selected but cannot be contacted after the campaign. What happens to their prize?</div>
-    <button class="quiz-option" id="q8-a" onclick="pick(8,this,'w')">It automatically rolls over to the next winner</button>
-    <button class="quiz-option" id="q8-b" onclick="pick(8,this,'w')">They have 30 days to respond before forfeiting</button>
-    <button class="quiz-option" id="q8-c" onclick="pick(8,this,'b')">They may forfeit their prize after 7 days</button>
-    <button class="quiz-option" id="q8-d" onclick="pick(8,this,'w')">The stylist who registered them receives the prize</button>
-  </div>
-
-  <div class="quiz-error" id="quiz-error">Please answer all 8 questions before submitting.</div>
+  <div class="quiz-error" id="quiz-error">Please answer all 6 questions before submitting.</div>
   <div class="nav-row">
     <button class="btn" id="btn-7-back" onclick="goStep(6)">Back</button>
     <button class="btn btn-primary" id="btn-7-submit" onclick="submitQuiz()">Submit quiz</button>
@@ -441,7 +426,7 @@
 <div class="step" id="step-8">
   <div class="score-wrap">
     <div class="score-ring">
-      <div class="score-number" id="score-num">0/8</div>
+      <div class="score-number" id="score-num">0/6</div>
       <div class="score-of" id="score-of-label">score</div>
     </div>
     <div class="score-title" id="score-title">—</div>
@@ -466,7 +451,7 @@ var correctIdx = {1:0, 2:1, 3:1, 4:2, 5:2, 6:2};
 
 var T = {
   en: {
-    pill: function(n){ return 'Step '+n+' of 8'; },
+    pill: function(n){ return 'Step '+n+' of 6'; },
     mod:  function(n){ return 'Module '+n+' of 5'; },
     switchLbl: 'ES',
     scoreOf: 'score',
@@ -556,10 +541,10 @@ var T = {
     s6pl:'Prizes at a glance', s6pb:'<span class="tag tag-green">Tier 1</span> 10 new clients win 6 months of free cuts (new clients only)<br/><span class="tag tag-blue">Tier 2</span> 3 existing clients win 1 free service up to $200<br/><span class="tag tag-amber">Tier 3</span> 10 weekly winners get product kits — open to all',
     s6tl:'Your targets', s6tb:'1.5 registrations per hour · 60 per week · Convert registrations into paying customers',
     s6rl:'Team rewards', s6rb:'Top store wins scissors kit for all stylists. Top individual stylist wins a $100 gift card.',
-    s6hi:'You are now ready for the quiz. You must score 8/8 to be certified and complete your training.',
+    s6hi:'You are now ready for the quiz. You must score 6/6 to be certified and complete your training.',
     // Step 7
     s7ey:'Final quiz', s7ti:'Test your knowledge',
-    s7in:'Select the best answer for each question. You must score 6/6 to be certified. All 8 questions must be answered before submitting.',
+    s7in:'Select the best answer for each question. You must score 6/6 to be certified. All 6 questions must be answered before submitting.',
     q1t:'1. When does the "Score a Goal with SmartStyle" campaign officially start?',
     q1a:'Monday, June 8, 2026', q1b:'Monday, July 4, 2026', q1c:'Sunday, June 1, 2026', q1d:'Friday, July 26, 2026',
     q2t:'2. What discount does a customer receive immediately after filling out the form?',
@@ -572,10 +557,6 @@ var T = {
     q5a:'Tell them they must enter to receive the service discount', q5b:'Promise them they will receive a prize for participating', q5c:'Remind them no purchase is necessary and the form gives them 20% off today', q5d:'Move on immediately without any additional comment',
     q6t:'6. What does the store with the highest number of registrations win?',
     q6a:'A $100 gift card for the store manager', q6b:'A free product bundle for the store', q6c:'A scissors tool kit for each stylist on the team', q6d:'An extra paid day off for all staff',
-    q7t:'7. Under what condition can an employee enter the raffle?',
-    q7a:'Employees can always enter freely', q7b:'Only if explicitly authorized by management', q7c:'Never under any circumstances', q7d:'Only for the weekly Tier 3 product prize',
-    q8t:'8. A winner is selected but cannot be contacted after the campaign. What happens to their prize?',
-    q8a:'It automatically rolls over to the next winner', q8b:'They have 30 days to respond before forfeiting', q8c:'They may forfeit their prize after 7 days', q8d:'The stylist who registered them receives the prize'
   },
   es: {
     pill: function(n){ return 'Paso '+n+' de 8'; },
@@ -671,7 +652,7 @@ var T = {
     s6hi:'Ya estás listo para el cuestionario. Debes obtener 6/6 para estar certificado y completar tu entrenamiento.',
     // Step 7
     s7ey:'Cuestionario final', s7ti:'Pon a prueba tu conocimiento',
-    s7in:'Selecciona la mejor respuesta para cada pregunta. Debes obtener 8/8 para certificarte. Las 8 preguntas deben responderse antes de enviar.',
+    s7in:'Selecciona la mejor respuesta para cada pregunta. Debes obtener 6/6 para certificarte. Las 6 preguntas deben responderse antes de enviar.',
     q1t:'1. ¿Cuándo comienza oficialmente la campaña "Anota un Gol con SmartStyle"?',
     q1a:'Lunes, 8 de junio de 2026', q1b:'Lunes, 4 de julio de 2026', q1c:'Domingo, 1 de junio de 2026', q1d:'Viernes, 26 de julio de 2026',
     q2t:'2. ¿Qué descuento recibe un cliente inmediatamente después de llenar el formulario?',
@@ -806,21 +787,20 @@ function submitQuiz() {
     document.getElementById("quiz-error").style.display = "none";
 
     let score = 0;
-    const keys = ["a", "b", "c", "d"];
 
-    for (let i = 1; i <= 6; i++) {
-        const correctKey = keys[correctIdx[i]];
-        const qEl = document.getElementById("q" + i);
+for (let i = 1; i <= 6; i++) {
+    const qEl = document.getElementById("q" + i);
 
-        qEl.querySelectorAll(".quiz-option").forEach(btn => {
-            btn.disabled = true;
-            if (btn.classList.contains("selected")) {
-                btn.classList.remove("selected");
-                btn.classList.add(answers[i] === correctKey ? "correct" : "wrong");
-            }
-        });
+    qEl.querySelectorAll(".quiz-option").forEach(btn => {
+        btn.disabled = true;
 
-        if (answers[i] === correctKey) score++;
+        if (btn.classList.contains("selected")) {
+            btn.classList.remove("selected");
+            btn.classList.add(answers[i] === "b" ? "correct" : "wrong");
+        }
+    });
+
+    if (answers[i] === "b") score++;
     }
 
     setTimeout(() => {
