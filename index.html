@@ -238,12 +238,12 @@
   <div class="prize-grid">
     <div class="prize-card">
       <div class="prize-tier" id="s3-t1-lbl">Tier 1</div>
-      <div class="prize-name" id="s3-t1-name">New Walmart clients only</div>
+      <div class="prize-name" id="s3-t1-name">All clients eligible</div>
       <div class="prize-detail"><span class="tag tag-green" id="s3-t1-tag">10 winners</span><br/><span id="s3-t1-body">6 months of free cut + shampoo service ($25.97/month). Up to 1 cut per calendar month, 6 total. Prize expires after 6 months. Transferable.</span></div>
     </div>
     <div class="prize-card">
       <div class="prize-tier" id="s3-t2-lbl">Tier 2</div>
-      <div class="prize-name" id="s3-t2-name">Existing clients only</div>
+      <div class="prize-name" id="s3-t2-name">All clients eligible</div>
       <div class="prize-detail"><span class="tag tag-blue" id="s3-t2-tag">3 winners</span><br/><span id="s3-t2-body">One free service of their choice up to $200. Valid for one service only, subject to scheduling. Non-transferable.</span></div>
     </div>
     <div class="prize-card">
@@ -254,8 +254,8 @@
   </div>
   <div class="highlight" id="s3-highlight">SmartStyle absorbs all prize costs — this means no change to stylist service amounts or pay for any prize service rendered.</div>
   <div class="card-eyebrow" style="margin-bottom:10px" id="s3-rules-lbl">Rules to remember</div>
-  <div class="list-item"><div class="list-dot"></div><span id="s3-r1">Tier 1 is exclusively for new clients — existing customers do not qualify</span></div>
-  <div class="list-item"><div class="list-dot"></div><span id="s3-r2">Tier 2 is exclusively for existing or returning customers</span></div>
+  <div class="list-item"><div class="list-dot"></div><span id="s3-r1">All clients are eligible for Tier 1 rewards</span></div>
+  <div class="list-item"><div class="list-dot"></div><span id="s3-r2">All clients are eligible for Tier 2 rewards</span></div>
   <div class="list-item"><div class="list-dot"></div><span id="s3-r3">No prizes have cash value</span></div>
   <div class="list-item"><div class="list-dot"></div><span id="s3-r4">Never promise prizes outside the official rules</span></div>
   <div class="nav-row">
@@ -313,7 +313,7 @@
   </div>
   <div class="script-box">
     <div class="script-situation" id="s5-sc3-lbl">If the customer asks about prizes</div>
-    <div class="script-line" id="s5-sc3">"We'll be selecting multiple winners weekly and at the end of the promotion. Some prizes are specifically for new customers, some are for existing customers, and others are open to everyone."</div>
+    <div class="script-line" id="s5-sc3">"We'll be selecting multiple winners weekly and at the end of the promotion. All customers are eligible for every prize level and every customer who enters has an equal chance to win."</div>
   </div>
   <div class="script-box">
     <div class="script-situation" id="s5-sc4-lbl">Upsell transition — after they sign up</div>
@@ -348,7 +348,7 @@
   </div>
   <div class="card">
     <div class="card-eyebrow" id="s6-prizes-lbl">Prizes at a glance</div>
-    <div class="card-body" id="s6-prizes-body"><span class="tag tag-green">Tier 1</span> 10 new clients win 6 months of free cuts (new clients only)<br/><span class="tag tag-blue">Tier 2</span> 3 existing clients win 1 free service up to $200<br/><span class="tag tag-amber">Tier 3</span> 10 weekly winners get product kits — open to all</div>
+    <div class="card-body" id="s6-prizes-body"><span class="tag tag-green">Tier 1</span> 10 winners receive 6 months of free cuts<br/><span class="tag tag-blue">Tier 2</span> 3 winners receive 1 free service up to $200<br/><span class="tag tag-amber">Tier 3</span> 10 weekly winners get product kits — all customers eligible</div>
   </div>
   <div class="card">
     <div class="card-eyebrow" id="s6-targets-lbl">Your targets</div>
@@ -495,13 +495,13 @@ var T = {
     // Step 3
     s3ey:'Module 2 of 5', s3ti:'Prize structure',
     s3in:'There are three prize tiers. Knowing who qualifies for each is one of the most important things to communicate accurately to customers.',
-    s3t1l:'Tier 1', s3t1n:'New Walmart clients only', s3t1tg:'10 winners', s3t1b:'6 months of free cut + shampoo service ($25.97/month). Up to 1 cut per calendar month, 6 total. Prize expires after 6 months. Transferable.',
-    s3t2l:'Tier 2', s3t2n:'Existing clients only', s3t2tg:'3 winners', s3t2b:'One free service of their choice up to $200. Valid for one service only, subject to scheduling. Non-transferable.',
+    s3t1l:'Tier 1', s3t1n:'All clients eligible', s3t1tg:'10 winners', s3t1b:'6 months of free cut + shampoo service ($25.97/month). Up to 1 cut per calendar month, 6 total. Prize expires after 6 months. Transferable.',
+    s3t2l:'Tier 2', s3t2n:'All clients eligible', s3t2tg:'3 winners', s3t2b:'One free service of their choice up to $200. Valid for one service only, subject to scheduling. Non-transferable.',
     s3t3l:'Tier 3 — Weekly', s3t3n:'All clients eligible', s3t3tg:'10 weekly winners', s3t3b:'Product kits and merchandise. Open to both new and existing clients. Product selection may vary. Non-transferable.',
     s3hi:'SmartStyle absorbs all prize costs — this means no change to stylist service amounts or pay for any prize service rendered.',
     s3rl:'Rules to remember',
-    s3r1:'Tier 1 is exclusively for new clients — existing customers do not qualify',
-    s3r2:'Tier 2 is exclusively for existing or returning customers',
+    s3r1:'All clients are eligible for Tier 1 rewards',
+    s3r2:'All clients are eligible for Tier 2 rewards',
     s3r3:'No prizes have cash value',
     s3r4:'Never promise prizes outside the official rules',
     // Step 4
@@ -523,7 +523,7 @@ var T = {
     s5sc2l:'If the customer hesitates',
     s5sc2:'"There\'s no purchase necessary to enter, and completing the form also gives you 20% off any service today or on a future visit while the promotion lasts."',
     s5sc3l:'If the customer asks about prizes',
-    s5sc3:'"We\'ll be selecting multiple winners weekly and at the end of the promotion. Some prizes are specifically for new customers, some are for existing customers, and others are open to everyone."',
+    s5sc3:'"We\'ll be selecting multiple winners weekly and at the end of the promotion. All customers are eligible for every prize level and every customer who enters has an equal chance to win."',
     s5sc4l:'Upsell transition — after they sign up',
     s5sc4:'"Since you have 20% off any service during this visit and future visits while the promotion lasts, this would also be a great opportunity to try [recommended service or product]."',
     s5rl:'Always remember',
@@ -537,7 +537,7 @@ var T = {
     s6in:'Review these key facts before taking the quiz. Everything here came from the previous modules.',
     s6dl:'Campaign dates', s6db:'Runs June 8 – July 26, 2026. Winners announced July 29, 2026.',
     s6dil:'The discount', s6dib:'Every customer who fills out the form receives 20% off any service during that visit and future visits while the promotion lasts. No purchase is necessary to enter the raffle.',
-    s6pl:'Prizes at a glance', s6pb:'<span class="tag tag-green">Tier 1</span> 10 new clients win 6 months of free cuts (new clients only)<br/><span class="tag tag-blue">Tier 2</span> 3 existing clients win 1 free service up to $200<br/><span class="tag tag-amber">Tier 3</span> 10 weekly winners get product kits — open to all',
+    s6pl:'Prizes at a glance', s6pb:'<span class="tag tag-green">Tier 1</span> 10 winners receive 6 months of free cuts<br/><span class="tag tag-blue">Tier 2</span> 3 winners receive 1 free service up to $200<br/><span class="tag tag-amber">Tier 3</span> 10 weekly winners get product kits — all customers eligible',
     s6tl:'Your targets', s6tb:'1.5 registrations per hour · 60 per week · Convert registrations into paying customers',
     s6rl:'Team rewards', s6rb:'Top store wins scissors kit for all stylists. Top individual stylist wins a $100 gift card.',
     s6hi:'You are now ready for the quiz. You must score 6/6 to be certified and complete your training.',
@@ -603,13 +603,13 @@ var T = {
     // Step 3
     s3ey:'Módulo 2 de 5', s3ti:'Estructura de premios',
     s3in:'Hay tres niveles de premios. Saber quién califica para cada uno es una de las cosas más importantes que debes comunicar con precisión a los clientes.',
-    s3t1l:'Nivel 1', s3t1n:'Solo nuevos clientes de Walmart', s3t1tg:'10 ganadores', s3t1b:'6 meses de corte + servicio de champú gratis ($25.97/mes). Hasta 1 corte por mes, 6 en total. El premio vence después de 6 meses. Transferible.',
-    s3t2l:'Nivel 2', s3t2n:'Solo clientes existentes', s3t2tg:'3 ganadores', s3t2b:'Un servicio gratuito a su elección hasta $200. Válido para un servicio únicamente, sujeto a disponibilidad. No transferible.',
+    s3t1l:'Nivel 1', s3t1n:'Todos los clientes son elegibles', s3t1tg:'10 ganadores', s3t1b:'6 meses de corte + servicio de champú gratis ($25.97/mes). Hasta 1 corte por mes, 6 en total. El premio vence después de 6 meses. Transferible.',
+    s3t2l:'Nivel 2', s3t2n:'Todos los clientes son elegibles', s3t2tg:'3 ganadores', s3t2b:'Un servicio gratuito a su elección hasta $200. Válido para un servicio únicamente, sujeto a disponibilidad. No transferible.',
     s3t3l:'Nivel 3 — Semanal', s3t3n:'Todos los clientes son elegibles', s3t3tg:'10 ganadores semanales', s3t3b:'Kits de productos y mercancía. Abierto para clientes nuevos y existentes. La selección de productos puede variar. No transferible.',
     s3hi:'SmartStyle absorbe todos los costos de los premios, lo que significa que no hay cambios en los montos de servicio ni en el pago de los estilistas.',
     s3rl:'Reglas para recordar',
-    s3r1:'El Nivel 1 es exclusivamente para nuevos clientes — los clientes existentes no califican',
-    s3r2:'El Nivel 2 es exclusivamente para clientes existentes o que regresan',
+    s3r1:'Todos los clientes son elegibles para los premios del Nivel 1',
+    s3r2:'Todos los clientes son elegibles para los premios del Nivel 2',
     s3r3:'Ningún premio tiene valor en efectivo',
     s3r4:'Nunca prometas premios fuera de las reglas oficiales',
     // Step 4
@@ -631,7 +631,7 @@ var T = {
     s5sc2l:'Si el cliente duda',
     s5sc2:'"No es necesario hacer ninguna compra para participar, y además completar el formulario te da un 20% de descuento en cualquier servicio hoy y en visitas futuras mientras dure la promoción."',
     s5sc3l:'Si el cliente pregunta sobre los premios',
-    s5sc3:'"Seleccionaremos múltiples ganadores semanalmente y al final de la promoción. Algunos premios son específicamente para nuevos clientes, otros para clientes existentes y otros están abiertos a todos."',
+    s5sc3:'"Seleccionaremos múltiples ganadores semanalmente y al final de la promoción. Todos los clientes son elegibles para cada nivel de premio y cada cliente que participa tiene la misma oportunidad de ganar."',
     s5sc4l:'Transición de venta adicional — después de que se registren',
     s5sc4:'"Ya que recibiste el 20% de descuento durante esta visita y en visitas futuras mientras dure la promoción, esta también sería una excelente oportunidad para probar [servicio o producto recomendado]."',
     s5rl:'Recuerda siempre',
@@ -645,7 +645,7 @@ var T = {
     s6in:'Repasa estos datos clave antes de realizar el cuestionario. Todo aquí proviene de los módulos anteriores.',
     s6dl:'Fechas de la campaña', s6db:'Del 8 de junio al 26 de julio de 2026. Ganadores anunciados el 29 de julio de 2026.',
     s6dil:'El descuento', s6dib:'Cada cliente que llene el formulario recibe un 20% de descuento en cualquier servicio durante esa visita y en visitas futuras mientras dure la promoción y visitas futuras mientras dure la promoción. No es necesario realizar ninguna compra para participar en el sorteo.',
-    s6pl:'Premios en resumen', s6pb:'<span class="tag tag-green">Nivel 1</span> 10 nuevos clientes ganan 6 meses de cortes gratis (solo nuevos clientes)<br/><span class="tag tag-blue">Nivel 2</span> 3 clientes existentes ganan 1 servicio gratuito de hasta $200<br/><span class="tag tag-amber">Nivel 3</span> 10 ganadores semanales reciben kits de productos — abierto a todos',
+    s6pl:'Premios en resumen', s6pb:'<span class="tag tag-green">Nivel 1</span> 10 ganadores reciben 6 meses de cortes gratis<br/><span class="tag tag-blue">Nivel 2</span> 3 ganadores reciben 1 servicio gratuito de hasta $200<br/><span class="tag tag-amber">Nivel 3</span> 10 ganadores semanales reciben kits de productos — todos los clientes son elegibles',
     s6tl:'Tus metas', s6tb:'1.5 registros por hora · 60 por semana · Convierte los registros en clientes de pago',
     s6rl:'Recompensas del equipo', s6rb:'La mejor tienda gana un kit de tijeras para todos los estilistas. El mejor estilista individual gana una tarjeta de regalo de $100.',
     s6hi:'Ya estás listo para el cuestionario. Debes obtener 6/6 para estar certificado y completar tu entrenamiento.',
